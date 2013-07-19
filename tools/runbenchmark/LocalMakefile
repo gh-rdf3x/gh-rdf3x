@@ -1,0 +1,5 @@
+src_tools_runbenchmark:=			\
+	tools/runbenchmark/runbenchmark.cpp
+
+$(PREFIX)runbenchmark$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_runbenchmark:.cpp=$(OBJEXT))) $(PREFIX)evalsparql$(EXEEXT)
+	$(buildexe)

@@ -1,0 +1,8 @@
+\timing
+select s0.value,s1.value
+from (
+   select f0.subject as r0,f0.object as r1
+   from uniprot.facts f0,uniprot.facts f1,uniprot.facts f2,uniprot.facts f3,uniprot.facts f4,uniprot.facts f5,uniprot.facts f6,uniprot.facts f7,uniprot.facts f8,uniprot.facts f9,uniprot.facts f10,uniprot.facts f11
+   where f0.predicate=15 and f1.subject=f0.subject and f1.predicate=14 and f1.object=13296652 and f2.subject=f0.subject and f2.predicate=17 and f2.object=70390 and f3.subject=f0.subject and f3.predicate=14 and f3.object=13296645 and f4.subject=f0.subject and f4.predicate=14 and f4.object=13296658 and f5.subject=f0.subject and f5.predicate=15 and f5.object=13296666 and f6.predicate=1 and f6.object=97 and f7.subject=f6.subject and f7.predicate=15 and f7.object=13311086 and f8.subject=f6.subject and f8.predicate=15 and f8.object=13311085 and f9.subject=f6.subject and f9.predicate=15 and f9.object=13311082 and f10.subject=f0.subject and f10.predicate=46 and f11.subject=f10.object and f11.predicate=94 and f11.object=f6.subject
+) facts,uniprot.strings s0,uniprot.strings s1
+where s0.id=facts.r0 and s1.id=facts.r1;

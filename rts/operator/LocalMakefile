@@ -1,0 +1,22 @@
+src_rts_operator:=					\
+	rts/operator/Operator.cpp			\
+	rts/operator/AggregatedIndexScan.cpp		\
+	rts/operator/EmptyScan.cpp			\
+	rts/operator/Filter.cpp				\
+	rts/operator/FullyAggregatedIndexScan.cpp	\
+	rts/operator/HashGroupify.cpp			\
+	rts/operator/HashJoin.cpp			\
+        rts/operator/HashOptional.cpp                       \
+	rts/operator/IndexScan.cpp			\
+	rts/operator/MergeJoin.cpp			\
+	rts/operator/MergeUnion.cpp			\
+	rts/operator/NestedLoopFilter.cpp		\
+	rts/operator/NestedLoopJoin.cpp			\
+	rts/operator/PlanPrinter.cpp			\
+	rts/operator/ResultsPrinter.cpp			\
+	rts/operator/Scheduler.cpp			\
+	rts/operator/Selection.cpp			\
+	rts/operator/SingletonScan.cpp			\
+	rts/operator/Sort.cpp				\
+	rts/operator/TableFunction.cpp			\
+	rts/operator/Union.cpp

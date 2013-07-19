@@ -1,0 +1,9 @@
+\timing
+select sa.value, sb.value
+from rdf.facts a, rdf.facts b, rdf.facts c, rdf.strings sa, rdf.strings sb
+where a.predicate=32 and b.predicate=31 and c.predicate=0 and a.object=3465 and b.subject=a.subject and b.object=c.subject and c.object<>1576 and a.subject=sa.id and c.object=sb.id;
+
+-- 32 http://simile.mit.edu/2006/01/ontologies/mods3#origin
+-- 3465 info:marcorg/DLC
+-- 31 http://simile.mit.edu/2006/01/ontologies/mods3#records
+-- 1576 http://simile.mit.edu/2006/01/ontologies/mods3#Text

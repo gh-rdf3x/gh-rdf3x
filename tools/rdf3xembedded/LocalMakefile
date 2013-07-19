@@ -1,0 +1,6 @@
+src_tools_rdf3xembedded:=				\
+	tools/rdf3xembedded/rdf3xembedded.cpp	
+
+$(PREFIX)rdf3xembedded$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_rdf3xembedded:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)))
+	$(buildexe)
+

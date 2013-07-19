@@ -1,0 +1,4 @@
+bin/rts/operator/IndexScan.o: rts/operator/IndexScan.cpp  include/infra/Config.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/IndexScan.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/FactsSegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/operator/IndexScan.d: rts/operator/IndexScan.cpp $(wildcard  include/infra/Config.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/IndexScan.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/FactsSegment.hpp include/rts/segment/Segment.hpp)
+

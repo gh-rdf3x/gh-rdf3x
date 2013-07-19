@@ -1,0 +1,23 @@
+select distinct ?u
+where {
+   {
+      ?u <documentary> ?b1
+      ?u <suspense> ?b1
+   }
+   union
+   {
+      ?u <biography> ?b2
+      ?u <suspense> ?b2
+   }
+   union
+   {
+      ?u <documentary> ?b3
+      ?u <mystery> ?b3
+   }
+   union
+   {
+      ?u <biography> ?b4
+      ?u <mystery> ?b4
+   }
+}
+

@@ -1,0 +1,6 @@
+src_tools_extractstats:=				\
+	tools/extractstats/extractstats.cpp
+
+$(PREFIX)extractstats$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_extractstats:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

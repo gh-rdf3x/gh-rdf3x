@@ -1,0 +1,7 @@
+src_tools_budgetrestriction:=			\
+	tools/users/budgetrestriction.cpp 
+
+
+$(PREFIX)budgetrestriction$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_budgetrestriction:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

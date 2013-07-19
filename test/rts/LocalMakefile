@@ -1,0 +1,7 @@
+include test/rts/partition/LocalMakefile
+include test/rts/segment/LocalMakefile
+
+src_test_rts:=				\
+	$(src_test_rts_partition)	\
+	$(src_test_rts_segment)
+

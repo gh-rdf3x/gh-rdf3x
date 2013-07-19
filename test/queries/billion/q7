@@ -1,0 +1,11 @@
+select distinct ?a ?b ?lat ?long where {
+?a <http://dbpedia.org/property/spouse> ?b.
+?a <http://dbpedia.org/property/wikilink> <http://dbpedia.org/resource/actor>.
+?b <http://dbpedia.org/property/wikilink> <http://dbpedia.org/resource/actor>.
+?a <http://dbpedia.org/property/placeOfBirth> ?c.
+?b <http://dbpedia.org/property/placeOfBirth> ?c.
+?c <http://www.w3.org/2002/07/owl#sameAs> ?c2.
+?c2 <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat.
+?c2 <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long.
+}
+

@@ -1,0 +1,13 @@
+select distinct ?name1 ?name2
+where {
+   ?a1 <isCalled> ?name1.
+   ?a2 <isCalled> ?name2.
+   ?a1 <livesIn> ?city1.
+   ?a2 <livesIn> ?city2.
+   ?city1 <locatedIn> "England".
+   ?city2 <locatedIn> "England".
+   ?a1 <actedIn> ?movie.
+   ?a2 <actedIn> ?movie.
+   FILTER (?a1 != ?a2)
+}
+

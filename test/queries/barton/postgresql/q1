@@ -1,0 +1,3 @@
+\timing
+select s.value, c from (select object, count(*) as c from rdf.facts where predicate=0 group by object) g, rdf.strings s where s.id=g.object;
+

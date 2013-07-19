@@ -1,0 +1,3 @@
+src_rts_partition:=					\
+	rts/partition/Partition.cpp			\
+	rts/partition/FilePartition.cpp

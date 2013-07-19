@@ -1,0 +1,13 @@
+$(PREFIX)transactiontest-rdf3x$(EXEEXT): $(addprefix $(PREFIX),tools/transactiontests/transactiontest-rdf3x$(OBJEXT) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+
+$(PREFIX)transactiontest-postgresql$(EXEEXT): $(addprefix $(PREFIX),tools/transactiontests/transactiontest-postgresql$(OBJEXT) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+
+LIBS-transactiontest-postgresql:=pqxx
+LIBFILE-pqxx:=-lpqxx
+
+space:=
+space+=
+$(PREFIX)tools/transactiontests/transactiontestjena.class: tools/transactiontests/transactiontestjena.java
+	javac -cp $(subst $(space),:,$(wildcard $(SDBROOT)/lib/*.jar)) -d $(PREFIX)tools/transactiontests tools/transactiontests/transactiontestjena.java

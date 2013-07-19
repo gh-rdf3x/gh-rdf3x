@@ -1,0 +1,13 @@
+select s.value
+from (
+   (
+      select t1.subject as u
+      from p776 t1, p3 t2, p3059 t3, p7766 t4
+      where t2.subject=t1.subject and t3.subject=t2.object and t4.object=t3.object)
+  union
+   (
+      select t1.subject as u
+      from p776 t1, p3 t2, p3 t3, p3059 t4, p7766 t5
+      where t2.subject=t1.subject and t3.subject=t2.object and t4.subject=t3.object and t5.object=t4.object)) t, strings s
+where s.id=t.u;
+

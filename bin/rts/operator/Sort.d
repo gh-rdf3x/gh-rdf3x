@@ -1,0 +1,4 @@
+bin/rts/operator/Sort.o: rts/operator/Sort.cpp  include/infra/Config.hpp include/infra/util/Pool.hpp include/infra/util/Type.hpp include/infra/util/VarPool.hpp include/rts/database/Database.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/operator/Sort.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/operator/Sort.d: rts/operator/Sort.cpp $(wildcard  include/infra/Config.hpp include/infra/util/Pool.hpp include/infra/util/Type.hpp include/infra/util/VarPool.hpp include/rts/database/Database.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/operator/Sort.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp)
+

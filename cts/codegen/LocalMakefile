@@ -1,0 +1,3 @@
+src_cts_codegen:=		\
+	cts/codegen/CodeGen.cpp
+

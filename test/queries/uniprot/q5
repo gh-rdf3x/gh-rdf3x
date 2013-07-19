@@ -1,0 +1,11 @@
+select ?a ?b ?vo
+where {
+   ?a <http://purl.uniprot.org/core/mnemonic> ?vo .
+   ?a <http://purl.uniprot.org/core/reviewed> "false" .
+   ?a <http://purl.uniprot.org/core/replacedBy> ?b .
+   ?b <http://purl.uniprot.org/core/mnemonic> [] .
+   ?b <http://purl.uniprot.org/core/reviewed> "false" .
+   ?b <http://purl.uniprot.org/core/replacedBy> ?c .
+   ?c <http://purl.uniprot.org/core/mnemonic> [] .
+   ?c <http://purl.uniprot.org/core/reviewed> "true" .
+}

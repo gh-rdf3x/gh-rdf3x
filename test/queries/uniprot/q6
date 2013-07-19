@@ -1,0 +1,16 @@
+select ?a ?vo
+where {
+   ?a <http://purl.uniprot.org/core/modified> ?vo .
+   ?a <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.uniprot.org/gene3d/G3DSA:3.40.630.40> .
+   ?a <http://purl.uniprot.org/core/annotation> <file:///home/neumann/uniprot.rdf#_5B622> .
+   ?a <http://purl.uniprot.org/core/enzyme> <http://purl.uniprot.org/enzyme/3.5.1.28> .
+   ?a <http://purl.uniprot.org/core/memberOf> <http://purl.uniprot.org/uniref/UniRef50_P63884> .
+   ?a <http://purl.uniprot.org/core/classifiedWith> <http://purl.uniprot.org/keywords/961> .
+   ?b <http://purl.uniprot.org/core/classifiedWith> <http://purl.uniprot.org/keywords/964> .
+   ?b <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.uniprot.org/echobase/EB2895> .
+   ?b <http://purl.uniprot.org/core/annotation> <http://purl.uniprot.org/annotation/PRO_0000006465> .
+   ?b <http://purl.uniprot.org/core/citation> <http://purl.uniprot.org/citations/16738553> .
+   ?b <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.uniprot.org/geneid/947293> .
+   ?a <http://purl.uniprot.org/core/replaces> ?ab . ?ab <http://purl.uniprot.org/core/replacedBy> ?b .
+}
+

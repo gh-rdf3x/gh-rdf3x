@@ -1,0 +1,8 @@
+select $title
+where {
+   $b <hasTitle> $title.
+   $u <romance> $b.
+   $u <love> $b.
+   $u <suspense> $b.
+}
+

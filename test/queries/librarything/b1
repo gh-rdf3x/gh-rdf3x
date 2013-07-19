@@ -1,0 +1,9 @@
+select distinct ?u
+where {
+   ?u <crime> ?b .
+   ?u <hasFavoriteAuthor> "Arthur Conan Doyle" .
+   ?u <hasFriend> ?f .
+   ?f <romance> ?b2 .
+   ?f <hasFavoriteAuthor> "Jane Austen" .
+}
+

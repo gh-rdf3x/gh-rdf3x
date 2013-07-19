@@ -1,0 +1,6 @@
+src_tools_evalsparql:=			\
+	tools/evalsparql/evalsparql.cpp
+
+$(PREFIX)evalsparql$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_evalsparql:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

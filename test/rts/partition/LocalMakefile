@@ -1,0 +1,3 @@
+src_test_rts_partition:=				\
+	test/rts/partition/TestFilePartition.cpp
+

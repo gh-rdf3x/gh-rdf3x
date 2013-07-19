@@ -1,0 +1,8 @@
+select sas.value, sbo.value, sco.value
+from p78 a, p2 b, p0 c, strings sas, strings sbo, strings sco
+where a.subject=b.subject and a.object=434745 and b.subject=c.subject and
+      sas.id=a.subject and sbo.id=b.object and sco.id=c.object;
+
+-- 78 http://simile.mit.edu/2006/01/ontologies/mods3#point
+-- 434745 end
+-- 2 http://simile.mit.edu/2006/01/ontologies/mods3#encoding

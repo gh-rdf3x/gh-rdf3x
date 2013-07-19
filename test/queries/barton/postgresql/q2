@@ -1,0 +1,5 @@
+\timing
+select s.value, g.c from (select b.predicate as predicate, count(*) as c from rdf.facts a, rdf.facts b where a.predicate=0 and a.object=1576 and a.subject=b.subject and b.predicate in (0,2,4,5,6,7,10,14,15,18,23,24,27,28,29,30,31,32,33,34,35,36,40,42,53,63,65,124) group by b.predicate) g, rdf.strings s where s.id=g.predicate;
+
+-- 1576 'http://simile.mit.edu/2006/01/ontologies/mods3#Text'
+

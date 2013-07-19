@@ -1,0 +1,11 @@
+rdf-3x
+bin/librarything
+A1 test/queries/librarything/a1
+A2 test/queries/librarything/a2
+A3 test/queries/librarything/a3
+B1 test/queries/librarything/b1
+B2 test/queries/librarything/b2
+B3 test/queries/librarything/b3
+C1 test/queries/librarything/c1
+C2 test/queries/librarything/c2
+

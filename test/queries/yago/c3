@@ -1,0 +1,9 @@
+select ?p1 ?predicate ?p2
+where {
+   ?p1 [] ?city1.
+   ?city1 <isCalled> "Paris".
+   ?p1 ?predicate ?p2.
+   ?p2 [] ?city2.
+   ?city2 <isCalled> "Hong Kong".
+}
+

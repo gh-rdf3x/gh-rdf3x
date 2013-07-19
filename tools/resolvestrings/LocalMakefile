@@ -1,0 +1,6 @@
+src_tools_resolvestrings:=			\
+	tools/resolvestrings/resolvestrings.cpp
+
+$(PREFIX)resolvestrings$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_resolvestrings:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)))
+	$(buildexe)
+

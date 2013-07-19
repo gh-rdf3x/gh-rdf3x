@@ -1,0 +1,13 @@
+select distinct ?name1 ?name2
+where {
+   ?name1 <familyNameOf> ?p1.
+   ?name2 <familyNameOf> ?p2.
+   ?p1 <type> "wordnet_scientist_110560637".
+   ?p2 <type> "wordnet_scientist_110560637".
+   ?p1 <hasWonPrize> ?award.
+   ?p2 <hasWonPrize> ?award.
+   ?p1 <bornInLocation> ?city.
+   ?p2 <bornInLocation> ?city.
+   FILTER (?p1 != ?p2)
+}
+

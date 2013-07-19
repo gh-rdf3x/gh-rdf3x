@@ -1,0 +1,7 @@
+select s1.value
+from strings s1,(
+   select distinct t1.subject as u
+   from p126 t1, p5 t2, p3 t3, p776 t4, p5 t5
+   where t2.subject=t1.subject and t2.object=338826 and t3.subject=t1.subject and t4.subject=t3.object and t5.subject=t3.object and t5.object=371101) t
+where t.u=s1.id;
+

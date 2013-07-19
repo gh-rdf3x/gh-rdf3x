@@ -1,0 +1,34 @@
++-----+-------------------------------------------------------------------+
+ |id  |name                                                               |
++=====+===================================================================+
+ |  0 |http://www.w3.org/1999/02/22-rdf-syntax-ns#type                    |
+ |  2 |http://simile.mit.edu/2006/01/ontologies/mods3#encoding            |
+ |  4 |http://simile.mit.edu/2006/01/ontologies/mods3#extent              |
+ |  5 |http://simile.mit.edu/2006/01/ontologies/mods3#authority           |
+ |  6 |http://simile.mit.edu/2006/01/ontologies/mods3#sub                 |
+ |  7 |http://simile.mit.edu/2006/01/ontologies/mods3#nonSort             |
+ | 10 |http://simile.mit.edu/2006/01/ontologies/mods3#partName            |
+ | 14 |http://simile.mit.edu/2006/01/ontologies/mods3#issuance            |
+ | 15 |http://simile.mit.edu/2006/01/ontologies/mods3#language            |
+ | 18 |http://simile.mit.edu/2006/01/ontologies/mods3#physicalDescription |
+ | 23 |http://simile.mit.edu/2006/01/ontologies/mods3#edition             |
+ | 24 |http://simile.mit.edu/2006/01/ontologies/mods3#copyrightDate       |
+ | 27 |http://simile.mit.edu/2006/01/ontologies/mods3#code                |
+ | 28 |http://simile.mit.edu/2006/01/ontologies/mods3#changed             |
+ | 29 |http://simile.mit.edu/2006/01/ontologies/mods3#created             |
+ | 30 |http://simile.mit.edu/2006/01/ontologies/mods3#records             |
+ | 31 |http://simile.mit.edu/2006/01/ontologies/mods3#origin              |
+ | 32 |http://simile.mit.edu/2006/01/ontologies/mods3#fullName            |
+ | 33 |http://simile.mit.edu/2006/01/ontologies/mods3#dates               |
+ | 34 |http://simile.mit.edu/2006/01/ontologies/mods3#address             |
+ | 35 |http://simile.mit.edu/2006/01/ontologies/mods3#partNumber          |
+ | 36 |http://simile.mit.edu/2006/01/ontologies/mods3#contents            |
+ | 40 |http://simile.mit.edu/2006/01/ontologies/mods3#point               |
+ | 42 |http://simile.mit.edu/2006/01/ontologies/mods3#qualifier           |
+ | 53 |http://simile.mit.edu/2006/01/ontologies/mods3#catalogingLanguage  |
+ | 63 |http://simile.mit.edu/2006/01/ontologies/mods3#access              |
+ | 65 |http://simile.mit.edu/2006/01/ontologies/mods3#dateCreated         |
+ |124 |http://simile.mit.edu/2006/01/ontologies/mods3#affiliation         |
++-----+-------------------------------------------------------------------+
+
+p0 p2 p4 p5 p6 p7 p10 p14 p15 p18 p23 p24 p27 p28 p29 p30 p31 p32 p33 p34 p35 p36 p40 p42 p53 p63 p65 p124

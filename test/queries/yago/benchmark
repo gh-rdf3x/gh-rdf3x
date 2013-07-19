@@ -1,0 +1,11 @@
+rdf-3x
+bin/yago
+A1 test/queries/yago/a1
+A2 test/queries/yago/a2
+A3 test/queries/yago/a3
+B1 test/queries/yago/b1
+B2 test/queries/yago/b2
+B3 test/queries/yago/b3
+C1 test/queries/yago/c1
+C2 test/queries/yago/c2
+

@@ -1,0 +1,6 @@
+src_tools_rdf3xdump:=			\
+	tools/rdf3xdump/rdf3xdump.cpp
+
+$(PREFIX)rdf3xdump$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_rdf3xdump:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)))
+	$(buildexe)
+

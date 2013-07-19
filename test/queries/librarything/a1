@@ -1,0 +1,9 @@
+select count $title
+where {
+   $b <hasTitle> $title.
+   $u1 <romance> $b.
+   $u2 <love> $b.
+   $u3 <suspense> $b.
+   $u4 <mystery> $b.
+}
+

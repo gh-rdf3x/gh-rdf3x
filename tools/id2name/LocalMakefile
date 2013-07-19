@@ -1,0 +1,13 @@
+src_tools_id2name:=			\
+	tools/id2name/id2name.cpp
+
+src_tools_name2id:=			\
+	tools/id2name/name2id.cpp
+
+
+$(PREFIX)id2name$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_id2name:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+
+$(PREFIX)name2id$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_name2id:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

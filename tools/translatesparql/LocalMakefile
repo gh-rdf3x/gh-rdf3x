@@ -1,0 +1,6 @@
+src_tools_translatesparql:=			\
+	tools/translatesparql/translatesparql.cpp
+
+$(PREFIX)translatesparql$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_translatesparql:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

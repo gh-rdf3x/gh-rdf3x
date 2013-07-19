@@ -1,0 +1,12 @@
+select distinct ?name1 ?name2
+where {
+   ?name1 <familyNameOf> ?p1.
+   ?name2 <familyNameOf> ?p2.
+   ?p1 <type> "wordnet_scientist_110560637".
+   ?p2 <type> "wordnet_scientist_110560637".
+   ?p1 [] ?city.
+   ?p2 [] ?city.
+   ?city <type> <wordnet_site_108651247>
+   FILTER (?p1 != ?p2)
+}
+

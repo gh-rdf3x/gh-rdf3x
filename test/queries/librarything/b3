@@ -1,0 +1,10 @@
+select distinct $u
+where {
+   $u [] $b1.
+   $u [] $b2.
+   $u [] $b3.
+   [] <english> $b1.
+   [] <german> $b2.
+   [] <french> $b3.
+}
+

@@ -1,0 +1,7 @@
+select s1.value, s2.value
+from (
+   select distinct t1.subject as u, t5.object as u2
+   from p5 t1, p1 t2, p3359 t3, p3616 t4, p4 t5, p5 t6, p1 t7, p3616 t8, p3359 t9
+   where t2.object=t1.object and t3.object=t2.subject and t4.subject=t1.subject and t5.subject=t1.subject and t6.subject=t5.object and t7.object=t6.object and t8.object=t7.subject and t9.subject=t5.object) t, strings s1, strings s2
+where s1.id=t.u and s2.id=t.u2;
+

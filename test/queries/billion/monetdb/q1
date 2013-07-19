@@ -1,0 +1,7 @@
+select s0.value,s1.value
+from (
+   select f2.object as r0,f3.object as r1
+   from allproperties f0,p527 f1,p51 f2,p52 f3
+   where f0.object=2721144 and f1.subject=f0.subject and f1.object=87727 and f2.subject=f0.subject and f3.subject=f0.subject
+) facts,strings s0,strings s1
+where s0.id=facts.r0 and s1.id=facts.r1;

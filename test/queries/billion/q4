@@ -1,0 +1,11 @@
+select ?l ?long ?lat where {
+?p <http://dbpedia.org/property/name> "Krebs, Emil".
+?p <http://dbpedia.org/property/deathPlace> ?l.
+#?c <http://www.geonames.org/ontology#name> ?l.
+?c [] ?l.
+?c <http://www.geonames.org/ontology#featureClass> <http://www.geonames.org/ontology#P>.
+?c <http://www.geonames.org/ontology#inCountry> <http://www.geonames.org/countries/#DE>.
+?c <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long.
+?c <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat.
+}
+

@@ -1,0 +1,9 @@
+src_tools_rdf3xload:=				\
+	tools/rdf3xload/rdf3xload.cpp		\
+	tools/rdf3xload/Sorter.cpp		\
+	tools/rdf3xload/StringLookup.cpp	\
+	tools/rdf3xload/TempFile.cpp
+
+$(PREFIX)rdf3xload$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_rdf3xload:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)))
+	$(buildexe)
+

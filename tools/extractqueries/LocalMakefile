@@ -1,0 +1,6 @@
+src_tools_extractqueries:=			\
+	tools/extractqueries/extractqueries.cpp
+
+$(PREFIX)extractqueries$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_extractqueries:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

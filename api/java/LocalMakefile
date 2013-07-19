@@ -1,0 +1,19 @@
+src_api_java:=						\
+	api/java/de/mpii/rdf3x/Connection.java		\
+	api/java/de/mpii/rdf3x/Driver.java		\
+	api/java/de/mpii/rdf3x/ResultSet.java		\
+	api/java/de/mpii/rdf3x/ResultSetMetaData.java	\
+	api/java/de/mpii/rdf3x/Statement.java		\
+	api/java/META-INF/services/java.sql.Driver
+
+$(PREFIX)rdf3xjava.jar: $(PREFIX)api/java/de/mpii/rdf3x/Driver.class $(PREFIX)api/java/META-INF/services/java.sql.Driver
+	jar cf $@ -C $(PREFIX)api/java .
+
+
+$(PREFIX)api/java/de/mpii/rdf3x/Driver.class: $(src_api_java)
+	$(checkdir)
+	javac -classpath $(PREFIX)api/java -sourcepath api/java -d $(PREFIX)api/java api/java/de/mpii/rdf3x/*.java
+
+$(PREFIX)api/java/META-INF/services/java.sql.Driver: api/java/META-INF/services/java.sql.Driver
+	$(checkdir)
+	cp $^ $@	

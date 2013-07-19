@@ -1,0 +1,6 @@
+src_tools_querygen:=			\
+	tools/querygen/querygen.cpp
+
+$(PREFIX)querygen$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_querygen:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

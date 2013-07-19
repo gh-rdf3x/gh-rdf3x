@@ -1,0 +1,6 @@
+select t.c, count(*)
+from table(SEM_MATCH(
+   '(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?c)',
+   SEM_Models('barton'),NULL,NULL,NULL)) t
+group by t.c;
+

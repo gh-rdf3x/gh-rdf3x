@@ -1,0 +1,10 @@
+rdf-3x
+bin/barton
+Q1 test/queries/barton/q1
+Q2 test/queries/barton/q2
+Q3 test/queries/barton/q3
+Q4 test/queries/barton/q4
+Q5 test/queries/barton/q5
+Q6 test/queries/barton/q6
+Q7 test/queries/barton/q7
+

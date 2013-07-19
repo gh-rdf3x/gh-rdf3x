@@ -1,0 +1,11 @@
+select s1.value
+from (
+(select t1.subject as u from otherpredicates t1, p4234 t2 where t1.subject=t2.subject and t1.object=t2.object and t1.predicate=14615)
+union
+(select t1.subject as u from p3059 t1, p4234 t2 where t1.subject=t2.subject and t1.object=t2.object)
+union
+(select t1.subject as u from otherpredicates t1, p3835 t2 where t1.subject=t2.subject and t1.object=t2.object and t1.predicate=14615)
+union
+(select t1.subject as u from p3059 t1, p3835 t2 where t1.subject=t2.subject and t1.object=t2.object)) t, strings s1
+where s1.id=t.u;
+

@@ -1,0 +1,11 @@
+select ?GivenName ?FamilyName
+where {
+   ?GivenName <givenNameOf> ?p .
+   ?FamilyName <familyNameOf> ?p .
+   ?p <type> "wordnet_scientist_110560637" .
+   ?p <bornInLocation> ?city .
+   ?city <locatedIn> "Switzerland" .
+   ?p <hasDoctoralAdvisor> ?a .
+   ?a <bornInLocation> ?city2 .
+   ?city2 <locatedIn> "Germany" .
+}

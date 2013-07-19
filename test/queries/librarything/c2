@@ -1,0 +1,13 @@
+select distinct ?u ?u2
+where {
+   ?u <hasFavoriteAuthor> ?a1 .
+   ?b1 <hasAuthor> ?a1 .
+   [] <europe> ?b1 .
+   ?u <america> [] .
+   ?u <hasInterestingLibrary> ?u2.
+   ?u2 <hasFavoriteAuthor> ?a2 .
+   ?b2 <hasAuthor> ?a2.
+   [] <america> ?b2 .
+   ?u2 <europe> [] .
+}
+

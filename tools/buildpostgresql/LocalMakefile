@@ -1,0 +1,6 @@
+src_tools_buildpostgresql:=				\
+	tools/buildpostgresql/buildpostgresql.cpp
+
+$(PREFIX)buildpostgresql$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_buildpostgresql:.cpp=$(OBJEXT)) tools/rdf3xload/Sorter$(OBJEXT) tools/rdf3xload/TempFile$(OBJEXT) $(src_infra:.cpp=$(OBJEXT)))
+	$(buildexe)
+

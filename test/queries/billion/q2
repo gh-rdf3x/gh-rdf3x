@@ -1,0 +1,9 @@
+select ?b ?p ?bn
+where {
+   ?a [] "Tim Berners-Lee".
+   ?a <http://dbpedia.org/property/dateOfBirth> ?b.
+   ?a <http://dbpedia.org/property/placeOfBirth> ?p.
+   ?a <http://dbpedia.org/property/name> ?bn.
+}
+
+

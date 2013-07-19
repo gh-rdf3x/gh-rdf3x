@@ -1,0 +1,7 @@
+select s1.value, s2.value
+from strings s1, strings s2, (
+   select distinct t1.subject as p1, t2.subject as p2
+   from p14 t1, p14 t2, p88 t3, p88 t4, allproperties t5, allproperties t6, p88 t7
+   where t3.subject=t1.object and t3.object=20374706 and t4.subject=t2.object and t4.object=20374706 and t5.subject=t1.object and t6.subject=t2.object and t6.object=t5.object and t7.subject=t5.object and t7.object=20368137) t
+where s1.id=t.p1 and s2.id=t.p2 and t.p1<>t.p2;
+

@@ -1,0 +1,6 @@
+select $as $bo $co
+where {
+   $as <http://simile.mit.edu/2006/01/ontologies/mods3#point> "end";
+   <http://simile.mit.edu/2006/01/ontologies/mods3#encoding> $bo;
+   a $co
+}

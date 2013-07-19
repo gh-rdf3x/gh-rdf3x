@@ -1,0 +1,16 @@
+select ?a ?vo
+where {
+   ?a <http://purl.uniprot.org/core/modified> ?vo .
+   ?a <http://purl.uniprot.org/core/reviewed> "false" .
+   ?a <http://purl.uniprot.org/core/mnemonic> "REST_CHICK" .
+   ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.uniprot.org/core/Protein> .
+   ?a <http://purl.uniprot.org/core/obsolete> "true" .
+   ?a <http://purl.uniprot.org/core/replacedBy> <http://purl.uniprot.org/uniprot/O42184> .
+   ?b <http://purl.uniprot.org/core/mnemonic> "REST_CHICK" .
+   ?b <http://purl.uniprot.org/core/modified> "1999-07-15" .
+   ?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.uniprot.org/core/Protein> .
+   ?b <http://purl.uniprot.org/core/replacedBy> <http://purl.uniprot.org/uniprot/O42184> .
+   ?b <http://purl.uniprot.org/core/mnemonic> "RSN_CHICK" .
+   ?a <http://purl.uniprot.org/core/replacedBy> ?ab . ?ab <http://purl.uniprot.org/core/replaces> ?b .
+}
+

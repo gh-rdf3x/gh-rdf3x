@@ -1,0 +1,4 @@
+select s1.value, s2.value
+from strings s1, strings s2, p63 t1, p63 t2, p66 t3, p1 t4, p1 t5
+where s1.id=t1.object and s2.id=t2.object and t3.subject=t1.subject and t3.object=t2.subject and t4.subject=t1.subject and t5.subject=t2.subject and t5.object=t4.object;
+

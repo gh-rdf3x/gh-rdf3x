@@ -1,0 +1,11 @@
+\timing
+select s1.value, s2.value
+from (
+   select b.predicate, b.object
+   from rdf.facts a, rdf.facts b, rdf.facts c
+   where a.predicate=0 and c.predicate=15 and a.object=1576 and c.object=1851 and a.subject=c.subject and b.subject=a.subject and b.predicate in (0,2,4,5,6,7,10,14,15,18,23,24,27,28,29,30,31,32,33,34,35,36,40,42,53,63,65,124) group by b.predicate, b.object having count(*)>1) g, rdf.strings s1, rdf.strings s2 where g.predicate=s1.id and g.object=s2.id;
+
+-- 1576 'http://simile.mit.edu/2006/01/ontologies/mods3#Text'
+-- 15 <http://simile.mit.edu/2006/01/ontologies/mods3#language>
+-- 1851 <http://simile.mit.edu/2006/01/language/iso639-2b/fre>
+

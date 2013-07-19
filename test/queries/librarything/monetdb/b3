@@ -1,0 +1,8 @@
+select distinct s1.value
+from strings s1, allproperties t1, allproperties t2, allproperties t3, p3671 t4, p5108 t5, p3205 t6
+where s1.id=t1.subject and t2.subject=t1.subject and t3.subject=t1.subject and t4.object=t1.object and t5.object=t2.object and t6.object=t3.object;
+
+# english 3671
+# german 5108
+# french 3205
+

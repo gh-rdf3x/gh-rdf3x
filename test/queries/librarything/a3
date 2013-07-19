@@ -1,0 +1,10 @@
+select distinct $title
+where {
+   $b <hasTitle> $title.
+   $b <hasAuthor> $a.
+   $u <mystery> $b.
+   $u <romance> [].
+   $b2 <hasAuthor> $a.
+   [] <children> $b2.
+}
+

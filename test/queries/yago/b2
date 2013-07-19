@@ -1,0 +1,9 @@
+select ?name1 ?name2
+where {
+   ?p1 <isCalled> ?name1.
+   ?p2 <isCalled> ?name2.
+   ?p1 <isMarriedTo> ?p2.
+   ?p1 <bornInLocation> ?city.
+   ?p2 <bornInLocation> ?city.
+}
+

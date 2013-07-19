@@ -1,0 +1,11 @@
+select distinct ?name
+where {
+   ?p <isCalled> ?name.
+   ?p [] ?c1.
+   ?p [] ?c2.
+   ?c1 <type> <wordnet_village_108672738>
+   ?c2 <type> <wordnet_site_108651247>
+   ?c1 <isCalled> "London".
+   ?c2 <isCalled> "Paris".
+}
+

@@ -1,0 +1,71 @@
+with parta as (
+   (select b.subject as subject
+    from p0 b where b.object=1576)
+   union all
+   (select c.subject as subject
+    from p31 c, p0 d
+    where c.object=d.subject and d.object=1576)
+)
+select pn.name, g.c from (
+(select 0 as predicate, c from (select count(*) as c from p0 l, parta r where l.subject=r.subject) s)
+union all
+(select 2 as predicate, c from (select count(*) as c from p2 l, parta r where l.subject=r.subject) s)
+union all
+(select 4 as predicate, c from (select count(*) as c from p4 l, parta r where l.subject=r.subject) s)
+union all
+(select 5 as predicate, c from (select count(*) as c from p5 l, parta r where l.subject=r.subject) s)
+union all
+(select 6 as predicate, c from (select count(*) as c from p6 l, parta r where l.subject=r.subject) s)
+union all
+(select 7 as predicate, c from (select count(*) as c from p7 l, parta r where l.subject=r.subject) s)
+union all
+(select 10 as predicate, c from (select count(*) as c from p10 l, parta r where l.subject=r.subject) s)
+union all
+(select 14 as predicate, c from (select count(*) as c from p14 l, parta r where l.subject=r.subject) s)
+union all
+(select 15 as predicate, c from (select count(*) as c from p15 l, parta r where l.subject=r.subject) s)
+union all
+(select 18 as predicate, c from (select count(*) as c from p18 l, parta r where l.subject=r.subject) s)
+union all
+(select 23 as predicate, c from (select count(*) as c from p23 l, parta r where l.subject=r.subject) s)
+union all
+(select 24 as predicate, c from (select count(*) as c from p24 l, parta r where l.subject=r.subject) s)
+union all
+(select 27 as predicate, c from (select count(*) as c from p27 l, parta r where l.subject=r.subject) s)
+union all
+(select 28 as predicate, c from (select count(*) as c from p28 l, parta r where l.subject=r.subject) s)
+union all
+(select 29 as predicate, c from (select count(*) as c from p29 l, parta r where l.subject=r.subject) s)
+union all
+(select 30 as predicate, c from (select count(*) as c from p30 l, parta r where l.subject=r.subject) s)
+union all
+(select 31 as predicate, c from (select count(*) as c from p31 l, parta r where l.subject=r.subject) s)
+union all
+(select 32 as predicate, c from (select count(*) as c from p32 l, parta r where l.subject=r.subject) s)
+union all
+(select 33 as predicate, c from (select count(*) as c from p33 l, parta r where l.subject=r.subject) s)
+union all
+(select 34 as predicate, c from (select count(*) as c from p34 l, parta r where l.subject=r.subject) s)
+union all
+(select 35 as predicate, c from (select count(*) as c from p35 l, parta r where l.subject=r.subject) s)
+union all
+(select 36 as predicate, c from (select count(*) as c from p36 l, parta r where l.subject=r.subject) s)
+union all
+(select 40 as predicate, c from (select count(*) as c from p40 l, parta r where l.subject=r.subject) s)
+union all
+(select 42 as predicate, c from (select count(*) as c from p42 l, parta r where l.subject=r.subject) s)
+union all
+(select 53 as predicate, c from (select count(*) as c from p53 l, parta r where l.subject=r.subject) s)
+union all
+(select 63 as predicate, c from (select count(*) as c from p63 l, parta r where l.subject=r.subject) s)
+union all
+(select 65 as predicate, c from (select count(*) as c from p65 l, parta r where l.subject=r.subject) s)
+union all
+(select 124 as predicate, c from (select count(*) as c from p124 l, parta r where l.subject=r.subject) s)
+) g, propertynames pn
+where g.c>0 and pn.id=g.predicate
+;
+
+-- 1576 'http://simile.mit.edu/2006/01/ontologies/mods3#Text'
+-- 15 <http://simile.mit.edu/2006/01/ontologies/mods3#language>
+-- 31 http://simile.mit.edu/2006/01/ontologies/mods3#records

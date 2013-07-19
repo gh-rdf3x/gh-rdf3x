@@ -1,0 +1,8 @@
+select distinct ?d where {
+   ?a <http://dbpedia.org/property/senators> ?c.
+   ?a <http://dbpedia.org/property/name> ?d.
+   ?c <http://dbpedia.org/property/profession> <http://dbpedia.org/resource/Veterinarian>.
+   ?a <http://www.w3.org/2002/07/owl#sameAs> ?b.
+   ?b <http://www.geonames.org/ontology#inCountry> <http://www.geonames.org/countries/#US>.
+}
+

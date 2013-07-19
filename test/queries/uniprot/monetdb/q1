@@ -1,0 +1,7 @@
+select s0.value,s1.value
+from (
+   select f0.subject as r0,f3.object as r1
+   from p0 f0,p26 f1,p13 f2,p26 f3
+   where f0.object=96 and f1.object=2087 and f2.subject=f0.subject and f2.object=f1.subject and f3.subject=f0.subject
+) facts,strings s0,strings s1
+where s0.id=facts.r0 and s1.id=facts.r1;

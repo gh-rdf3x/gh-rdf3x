@@ -1,0 +1,8 @@
+select sa.value, sb.value
+from p32 a, p31 b, p0 c, strings sa, strings sb
+where a.object=3465 and b.subject=a.subject and b.object=c.subject and c.object<>1576 and a.subject=sa.id and c.object=sb.id;
+
+-- 32 http://simile.mit.edu/2006/01/ontologies/mods3#origin
+-- 3465 info:marcorg/DLC
+-- 31 http://simile.mit.edu/2006/01/ontologies/mods3#records
+-- 1576 http://simile.mit.edu/2006/01/ontologies/mods3#Text

@@ -1,0 +1,53 @@
+include tools/buildmonetdb/LocalMakefile
+include tools/buildn3/LocalMakefile
+include tools/buildpostgresql/LocalMakefile
+include tools/buildrdfstore/LocalMakefile
+include tools/buildtransactions/LocalMakefile
+include tools/checkrdfstore/LocalMakefile
+include tools/evalsparql/LocalMakefile
+include tools/extractschema/LocalMakefile
+include tools/extractstats/LocalMakefile
+include tools/extractqueries/LocalMakefile
+include tools/dumpredland/LocalMakefile
+include tools/dumpyago/LocalMakefile
+include tools/predtest/LocalMakefile
+include tools/querygen/LocalMakefile
+include tools/rdf3xdump/LocalMakefile
+include tools/rdf3xembedded/LocalMakefile
+include tools/rdf3xload/LocalMakefile
+include tools/rdf3xreorg/LocalMakefile
+include tools/rdf3xupdate/LocalMakefile
+include tools/printscan/LocalMakefile
+include tools/rdf3xquery/LocalMakefile
+include tools/resolvestrings/LocalMakefile
+include tools/runbenchmark/LocalMakefile
+include tools/transactiontests/LocalMakefile
+include tools/translatesparql/LocalMakefile
+include tools/updatetest/LocalMakefile
+include tools/checkupdates/LocalMakefile
+
+src_tools:=				\
+	$(src_tools_buildmonetdb)	\
+	$(src_tools_buildn3)		\
+	$(src_tools_buildpostgresql)	\
+	$(src_tools_buildrdfstore)	\
+	$(src_tools_evalsparql)		\
+	$(src_tools_extractschema)	\
+	$(src_tools_extractstats)	\
+	$(src_tools_extractqueries)	\
+	$(src_tools_dumpredland)	\
+	$(src_tools_dumpyago)		\
+	$(src_tools_querygen)		\
+	$(src_tools_rdf3xdump)		\
+	$(src_tools_rdf3xembedded)	\
+	$(src_tools_rdf3xload)		\
+	$(src_tools_rdf3xreorg)		\
+	$(src_tools_rdf3xupdate)	\
+	$(src_tools_rdf3xquery)		\
+	$(src_tools_resolvestrings)	\
+	$(src_tools_translatesparql)	\
+	$(src_tools_updatetest)     \
+	$(src_tools_checkupdates)   \
+    $(src_tools_printscan)
+	
+

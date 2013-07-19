@@ -1,0 +1,7 @@
+select $as $co
+where {
+$as <http://simile.mit.edu/2006/01/ontologies/mods3#origin> "info:marcorg/DLC" ;
+<http://simile.mit.edu/2006/01/ontologies/mods3#records> $bo.
+$bo <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> $co.
+filter ($co != <http://simile.mit.edu/2006/01/ontologies/mods3#Text>)
+}

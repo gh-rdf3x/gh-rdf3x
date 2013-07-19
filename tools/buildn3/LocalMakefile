@@ -1,0 +1,6 @@
+src_tools_buildn3:=			\
+	tools/buildn3/buildn3.cpp
+
+$(PREFIX)buildn3$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_buildn3:.cpp=$(OBJEXT))) $(PREFIX)infra/osdep/MemoryMappedFile$(OBJEXT)
+	$(buildexe)
+

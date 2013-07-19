@@ -1,0 +1,3 @@
+src_test_infra_osdep:=				\
+	test/infra/osdep/TestGrowableMappedFile.cpp
+

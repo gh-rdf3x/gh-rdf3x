@@ -1,0 +1,8 @@
+\timing
+select s0.value,s1.value,s2.value
+from (
+   select f1.object as r0,f2.object as r1,f3.object as r2
+   from billion.facts f0,billion.facts f1,billion.facts f2,billion.facts f3
+   where f0.object=660728 and f1.subject=f0.subject and f1.predicate=449 and f2.subject=f0.subject and f2.predicate=448 and f3.subject=f0.subject and f3.predicate=83
+) facts,billion.strings s0,billion.strings s1,billion.strings s2
+where s0.id=facts.r0 and s1.id=facts.r1 and s2.id=facts.r2;

@@ -1,0 +1,62 @@
+with parta as (select a.subject from p0 a where a.object=1522)
+select pn.name, so.value, g.c from (
+(select 0 as predicate, object, c from (select l.object as object, count(*) as c from p0 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 2 as predicate, object, c from (select l.object as object, count(*) as c from p2 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 4 as predicate, object, c from (select l.object as object, count(*) as c from p4 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 5 as predicate, object, c from (select l.object as object, count(*) as c from p5 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 6 as predicate, object, c from (select l.object as object, count(*) as c from p6 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 7 as predicate, object, c from (select l.object as object, count(*) as c from p7 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 10 as predicate, object, c from (select l.object as object, count(*) as c from p10 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 14 as predicate, object, c from (select l.object as object, count(*) as c from p14 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 15 as predicate, object, c from (select l.object as object, count(*) as c from p15 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 18 as predicate, object, c from (select l.object as object, count(*) as c from p18 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 23 as predicate, object, c from (select l.object as object, count(*) as c from p23 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 24 as predicate, object, c from (select l.object as object, count(*) as c from p24 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 27 as predicate, object, c from (select l.object as object, count(*) as c from p27 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 28 as predicate, object, c from (select l.object as object, count(*) as c from p28 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 29 as predicate, object, c from (select l.object as object, count(*) as c from p29 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 30 as predicate, object, c from (select l.object as object, count(*) as c from p30 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 31 as predicate, object, c from (select l.object as object, count(*) as c from p31 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 32 as predicate, object, c from (select l.object as object, count(*) as c from p32 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 33 as predicate, object, c from (select l.object as object, count(*) as c from p33 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 34 as predicate, object, c from (select l.object as object, count(*) as c from p34 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 35 as predicate, object, c from (select l.object as object, count(*) as c from p35 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 36 as predicate, object, c from (select l.object as object, count(*) as c from p36 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 40 as predicate, object, c from (select l.object as object, count(*) as c from p40 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 42 as predicate, object, c from (select l.object as object, count(*) as c from p42 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 53 as predicate, object, c from (select l.object as object, count(*) as c from p53 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 63 as predicate, object, c from (select l.object as object, count(*) as c from p63 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 65 as predicate, object, c from (select l.object as object, count(*) as c from p65 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+union all
+(select 124 as predicate, object, c from (select l.object as object, count(*) as c from p124 l, parta r where l.subject=r.subject group by l.object having count(*)>1) s)
+) g, strings so, propertynames pn
+where g.object=so.id and pn.id=g.predicate
+;
+
+-- 1522 'http://simile.mit.edu/2006/01/ontologies/mods3#Text'

@@ -1,0 +1,6 @@
+src_tools_checkrdfstore:=			\
+	tools/checkrdfstore/checkrdfstore.cpp
+
+$(PREFIX)checkrdfstore$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_checkrdfstore:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)))
+	$(buildexe)
+

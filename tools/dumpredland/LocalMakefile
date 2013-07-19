@@ -1,0 +1,6 @@
+src_tools_dumpredland:=			\
+	tools/dumpredland/dumpredland.cpp
+
+$(PREFIX)dumpredland$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_dumpredland:.cpp=$(OBJEXT))) $(PREFIX)infra/util/Hash$(OBJEXT)
+	$(buildexe)
+

@@ -1,0 +1,7 @@
+select s0.value,s1.value
+from (
+   select f0.subject as r0,f0.object as r1
+   from p15 f0,p14 f1,p17 f2,p14 f3,p14 f4,p15 f5,p1 f6,p15 f7,p15 f8,p15 f9,p46 f10,p94 f11
+   where f1.subject=f0.subject and f1.object=13296652 and f2.subject=f0.subject and f2.object=70390 and f3.subject=f0.subject and f3.object=13296645 and f4.subject=f0.subject and f4.object=13296658 and f5.subject=f0.subject and f5.object=13296666 and f6.object=97 and f7.subject=f6.subject and f7.object=13311086 and f8.subject=f6.subject and f8.object=13311085 and f9.subject=f6.subject and f9.object=13311082 and f10.subject=f0.subject and f11.subject=f10.object and f11.object=f6.subject
+) facts,strings s0,strings s1
+where s0.id=facts.r0 and s1.id=facts.r1;

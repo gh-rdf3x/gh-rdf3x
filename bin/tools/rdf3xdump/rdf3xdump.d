@@ -1,0 +1,4 @@
+bin/tools/rdf3xdump/rdf3xdump.o: tools/rdf3xdump/rdf3xdump.cpp  include/infra/Config.hpp include/infra/util/Type.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/IndexScan.hpp include/rts/operator/Operator.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/FactsSegment.hpp include/rts/segment/Segment.hpp
+
+bin/tools/rdf3xdump/rdf3xdump.d: tools/rdf3xdump/rdf3xdump.cpp $(wildcard  include/infra/Config.hpp include/infra/util/Type.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/IndexScan.hpp include/rts/operator/Operator.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/FactsSegment.hpp include/rts/segment/Segment.hpp)
+

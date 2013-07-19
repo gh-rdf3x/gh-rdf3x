@@ -1,0 +1,5 @@
+src_cts_parser:=			\
+	cts/parser/SPARQLLexer.cpp	\
+	cts/parser/SPARQLParser.cpp	\
+	cts/parser/TurtleParser.cpp
+

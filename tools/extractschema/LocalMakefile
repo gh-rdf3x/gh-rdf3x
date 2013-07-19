@@ -1,0 +1,6 @@
+src_tools_extractschema:=			\
+	tools/extractschema/extractschema.cpp
+
+$(PREFIX)extractschema$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_extractschema:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+

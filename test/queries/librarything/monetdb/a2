@@ -1,0 +1,10 @@
+select s1.value
+from strings s1, p0 t1, p776 t2, p4769 t3, p4234 t4
+where s1.id=t1.object and t2.object=t1.subject and t3.object=t1.subject and t3.subject=t2.subject and t4.object=t1.subject and t4.subject=t2.subject;
+
+
+# hasTitle 0
+# romance 776
+# love 4769
+# suspense 4234
+

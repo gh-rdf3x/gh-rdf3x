@@ -1,0 +1,8 @@
+src_gtest:=				\
+	gtest/src/gtest.cpp		\
+	gtest/src/gtest-death-test.cpp	\
+	gtest/src/gtest-filepath.cpp	\
+	gtest/src/gtest-port.cpp	\
+	gtest/src/gtest-test-part.cpp	\
+	gtest/src/gtest-typed-test.cpp
+

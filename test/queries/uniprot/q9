@@ -1,0 +1,15 @@
+select ?a ?vo
+where {
+   ?a <http://purl.uniprot.org/core/annotation> ?vo .
+   ?a <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.uniprot.org/interpro/IPR000842> .
+   ?a <http://purl.uniprot.org/core/annotation> <file:///home/neumann/uniprot.rdf#_540A71> .
+   ?a <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.uniprot.org/geneid/945772> .
+   ?a <http://purl.uniprot.org/core/annotation> <file:///home/neumann/uniprot.rdf#_540A7D> .
+   ?a <http://purl.uniprot.org/core/citation> <http://purl.uniprot.org/citations/9298646> .
+   ?b <http://purl.uniprot.org/core/obsolete> "true" .
+   ?b <http://purl.uniprot.org/core/replacedBy> <http://purl.uniprot.org/uniprot/P0A718> .
+   ?b <http://purl.uniprot.org/core/reviewed> "true" .
+   ?b <http://purl.uniprot.org/core/mnemonic> "KPRS_ECOLI" .
+   ?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.uniprot.org/core/Protein> .
+   ?a <http://purl.uniprot.org/core/replaces> ?ab . ?ab <http://purl.uniprot.org/core/replacedBy> ?b .
+}

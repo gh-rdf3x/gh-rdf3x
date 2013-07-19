@@ -1,0 +1,10 @@
+select distinct s1.value
+from strings s1, p0 t1, p1 t2, p3835 t3, p776 t4, p1 t5, p12132 t6
+where s1.id=t1.object and t2.subject=t1.subject and t3.object=t1.subject and t4.subject=t3.subject and t5.object=t2.object and t6.object=t5.subject;
+
+# hasTitle 0
+# hasAuthor 1
+# mystery 3835
+# romance 776
+# children 12132
+

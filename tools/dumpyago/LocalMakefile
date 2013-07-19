@@ -1,0 +1,6 @@
+src_tools_dumpyago:=			\
+	tools/dumpyago/dumpyago.cpp
+
+$(PREFIX)dumpyago$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_dumpyago:.cpp=$(OBJEXT)))
+	$(buildexe)
+

@@ -1,0 +1,3 @@
+src_rts_buffer:=			\
+	rts/buffer/BufferManager.cpp	\
+	rts/buffer/BufferReference.cpp

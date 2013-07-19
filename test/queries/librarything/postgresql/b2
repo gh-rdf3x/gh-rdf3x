@@ -1,0 +1,12 @@
+\timing
+select s1.value
+from (
+(select t1.subject as u from librarything.facts t1, librarything.facts t2 where t1.subject=t2.subject and t1.object=t2.object and t1.predicate=14615 and t2.predicate=4234)
+union
+(select t1.subject as u from librarything.facts t1, librarything.facts t2 where t1.predicate=3059 and t2.predicate=4234 and t1.subject=t2.subject and t1.object=t2.object)
+union
+(select t1.subject as u from librarything.facts t1, librarything.facts t2 where t2.predicate=3835 and t1.subject=t2.subject and t1.object=t2.object and t1.predicate=14615)
+union
+(select t1.subject as u from librarything.facts t1, librarything.facts t2 where t1.predicate=3059 and t2.predicate=3835 and t1.subject=t2.subject and t1.object=t2.object)) t, librarything.strings s1
+where s1.id=t.u;
+

@@ -1,0 +1,13 @@
+select s1.value, s2.value
+from p16 t1, p14 t2, p88 t3, p1 t4, p74 t5, p25 t6, p1 t7, p74 t8, strings s1, strings s2
+where s1.id=t1.subject and s2.id=t2.subject and t2.object=t1.object and t3.subject=t1.object and t3.object=20374706 and t4.subject=t1.object and t5.subject=t4.object and t5.object=42854 and t6.subject=t1.object and t7.subject=t6.object and t8.subject=t7.object and t8.object=32423;
+# givenNameOf 16
+# familyNameOf 14
+# type 88
+# wordnet_scientist_110560637 20374706
+# bornInLocation 1
+# Switzerland 42854
+# locatedIn 74
+# hasDoctoralAdvisor 25
+# Germany 32423
+ 

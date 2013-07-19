@@ -1,0 +1,4 @@
+bin/rts/operator/TableFunction.o: rts/operator/TableFunction.cpp  include/infra/Config.hpp include/infra/util/Type.hpp include/rts/database/Database.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/operator/TableFunction.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/runtime/TemporaryDictionary.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/operator/TableFunction.d: rts/operator/TableFunction.cpp $(wildcard  include/infra/Config.hpp include/infra/util/Type.hpp include/rts/database/Database.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/operator/TableFunction.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/runtime/TemporaryDictionary.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp)
+

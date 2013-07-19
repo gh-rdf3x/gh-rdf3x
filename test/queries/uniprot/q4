@@ -1,0 +1,16 @@
+select ?a ?vo ?ab
+where {
+   ?a <http://purl.uniprot.org/core/modified> ?vo .
+   ?a <http://purl.uniprot.org/core/obsolete> "true" .
+   ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.uniprot.org/core/Protein> .
+   ?a <http://purl.uniprot.org/core/mnemonic> "Q5RL09_MOUSE" .
+   ?a <http://purl.uniprot.org/core/replacedBy> ?c .
+   ?b <http://purl.uniprot.org/core/mnemonic> "Q8C625_MOUSE" .
+   ?b <http://purl.uniprot.org/core/replacedBy> ?c .
+   ?b <http://purl.uniprot.org/core/obsolete> "true" .
+   # ?a <http://purl.uniprot.org/core/replacedBy> ?ab . ?ab [] ?b .
+   ?a [] ?ab .
+   ?b [] ?ab .
+   ?ab <http://purl.uniprot.org/core/classifiedWith> <http://purl.uniprot.org/go/0006468> .
+}
+

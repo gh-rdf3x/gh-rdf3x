@@ -1,0 +1,18 @@
+# initial database size
+1000000
+
+# chunk size
+10000
+
+# chunk count
+100
+
+# worker threads
+5
+
+# delay model
+0
+
+# query model
+0
+

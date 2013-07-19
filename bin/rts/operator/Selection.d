@@ -1,0 +1,4 @@
+bin/rts/operator/Selection.o: rts/operator/Selection.cpp  include/infra/Config.hpp include/infra/util/Type.hpp include/rts/database/Database.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/operator/Selection.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/operator/Selection.d: rts/operator/Selection.cpp $(wildcard  include/infra/Config.hpp include/infra/util/Type.hpp include/rts/database/Database.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/operator/Selection.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp)
+

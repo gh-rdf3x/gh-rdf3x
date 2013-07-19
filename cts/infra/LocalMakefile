@@ -1,0 +1,4 @@
+src_cts_infra:=				\
+	cts/infra/BitSet.cpp		\
+	cts/infra/QueryGraph.cpp
+

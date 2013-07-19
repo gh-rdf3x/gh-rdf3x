@@ -1,0 +1,7 @@
+# Separate build rules to avoid cyclic dependencies
+$(PREFIX)makeutil/getdep$(OBJEXT): makeutil/getdep.cpp
+	$(checkdir)
+	$(compile)
+
+$(PREFIX)makeutil/getdep$(EXEEXT): $(PREFIX)makeutil/getdep$(OBJEXT)
+	$(buildexe)

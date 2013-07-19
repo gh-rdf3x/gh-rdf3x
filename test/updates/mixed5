@@ -1,0 +1,28 @@
+# initial database size
+1000000
+
+# chunk size
+10000
+
+# chunk count
+100
+
+# worker threads
+5
+
+# delay model
+0
+
+# query model
+1
+
+# queries
+select count $title where { $b <hasTitle> $title. $u1 <romance> $b. $u2 <love> $b. $u3 <suspense> $b. $u4 <mystery> $b. }
+select $title where { $b <hasTitle> $title. $u <romance> $b. $u <love> $b. $u <suspense> $b. }
+select distinct $title where { $b <hasTitle> $title. $b <hasAuthor> $a. $u <mystery> $b. $u <romance> []. $b2 <hasAuthor> $a. [] <children> $b2. }
+select distinct ?u where { ?u <crime> ?b . ?u <hasFavoriteAuthor> "Arthur Conan Doyle" . ?u <hasFriend> ?f . ?f <romance> ?b2 . ?f <hasFavoriteAuthor> "Jane Austen" . }
+# select distinct ?u where { { ?u <documentary> ?b1 ?u <suspense> ?b1 } union { ?u <biography> ?b2 ?u <suspense> ?b2 } union { ?u <documentary> ?b3 ?u <mystery> ?b3 } union { ?u <biography> ?b4 ?u <mystery> ?b4 } }
+select distinct $u where { $u [] $b1. $u [] $b2. $u [] $b3. [] <english> $b1. [] <german> $b2. [] <french> $b3. }
+# select distinct ?u where { { ?u <romance> ?b1 . ?u <hasFriend> ?f1 . ?f1 <biography> ?b2 . ?u2 <thriller> ?b2. } union { ?u <romance> ?b1 . ?u <hasFriend> ?f1 . ?f1 <hasFriend> ?f2 . ?f2 <biography> ?b2 . ?u2 <thriller> ?b2. } }
+select distinct ?u ?u2 where { ?u <hasFavoriteAuthor> ?a1 . ?b1 <hasAuthor> ?a1 . [] <europe> ?b1 . ?u <america> [] . ?u <hasInterestingLibrary> ?u2. ?u2 <hasFavoriteAuthor> ?a2 . ?b2 <hasAuthor> ?a2. [] <america> ?b2 . ?u2 <europe> [] . }
+select ?b where { ?u1 <hasInterestingLibrary> ?u2 . ?u2 <hasInterestingLibrary> ?u3 . ?u1 <love> ?b . ?u2 ?p2 ?b . ?u3 ?p3 ?b . }

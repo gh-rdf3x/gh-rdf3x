@@ -1,0 +1,53 @@
+# Hack, GNU make suggests g++ by default
+ifeq ($(origin CXX), default)
+CXX:=
+endif
+
+ifeq ($(CXX),)
+CXX:=g++
+endif
+
+ifeq ($(CXX),bcc32)
+CXXFLAGS:=-v -vi -y -R -O2 -tWM -w
+IFLAGS:=-Iinclude
+OBJEXT:=.obj
+EXEEXT:=.exe
+TARGET:=-o
+EXETARGET:=-e
+endif
+
+ifeq ($(CXX),cl)
+CXXFLAGS:=/O2 /Zi /Zc:forScope /GR /EHsc /MT
+IFLAGS:=/Iinclude
+OBJEXT:=.obj
+EXEEXT:=.exe
+TARGET:=/Fo
+EXETARGET:=/Fe
+LIBS:=wsock32.lib
+endif
+
+ifeq ($(CXX),g++)
+CXXFLAGS:=-g -O0 -W -Wall
+ifeq ($(USER),neumann)
+CXXFLAGS:=$(CXXFLAGS) -Werror
+endif
+CXXFLAGS-gtest:=-Wno-error -DGTEST_OS_WINDOWS
+IFLAGS:=-Iinclude
+IFLAGS-gtest:=-Igtest/include -Igtest
+IFLAGS-test:=-Igtest/include
+OBJEXT:=.o
+EXEEXT:=.exe
+TARGET:=-o 
+EXETARGET:=-o 
+LIBS:=-lws2_32
+endif
+
+nativefile=$(subst /,\\,$(1))
+
+define checkdir
+@if not exist $(call nativefile,$(dir $@)) mkdir $(call nativefile,$(dir $@))
+endef
+
+define buildexe
+$(CXX) $(EXETARGET)$(call nativefile,$@) $(CXXFLAGS) $(CXXFLAGS-$(subst $(PREFIX),,$(basename $@))) $(IFLAGS) $(call nativefile,$(filter %$(OBJEXT),$^)) $(foreach file,$(LIBS-$(patsubst $(PREFIX)%$(EXEEXT),%,$@)),$(LIBFILE-$(file))) $(LIBS)
+endef

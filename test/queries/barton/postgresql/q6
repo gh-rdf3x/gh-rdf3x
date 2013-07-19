@@ -1,0 +1,16 @@
+\timing
+select s.value, g.count
+from (
+   select c.predicate as predicate, count(*) as count
+   from (
+      (select a.subject from rdf.facts a where a.predicate=0 and a.object=1576)
+      union all
+      (select a.subject from rdf.facts a, rdf.facts b where a.predicate=31 and b.predicate=0 and a.object=b.subject and b.object=1576)
+   ) a, rdf.facts b, rdf.facts c
+   where a.subject=b.subject and b.predicate=0 and b.object=1576 and c.subject=a.subject and c.predicate in (0,2,4,5,6,7,10,14,15,18,23,24,27,28,29,30,31,32,33,34,35,36,40,42,53,63,65,124) group by c.predicate) g, rdf.strings s
+where s.id=g.predicate;
+;
+
+-- 1576 'http://simile.mit.edu/2006/01/ontologies/mods3#Text'
+-- 15 <http://simile.mit.edu/2006/01/ontologies/mods3#language>
+-- 31 http://simile.mit.edu/2006/01/ontologies/mods3#records

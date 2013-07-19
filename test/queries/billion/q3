@@ -1,0 +1,9 @@
+select ?t ?lat ?long
+where {
+   ?a <http://dbpedia.org/property/wikilink> <http://dbpedia.org/resource/List_of_World_Heritage_Sites_in_Europe>.
+   ?a <http://dbpedia.org/property/title> ?t.
+   ?a <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat.
+   ?a <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long.
+   ?a <http://dbpedia.org/property/wikilink> <http://dbpedia.org/resource/Middle_Ages>.
+}
+

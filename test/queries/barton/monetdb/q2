@@ -1,0 +1,4 @@
+select s.value, g.c from (select b.predicate as predicate, count(*) as c from p0 a, filteredproperties b where a.object=1576 and a.subject=b.subject group by b.predicate) g, strings s where s.id=g.predicate;
+
+-- 1576 'http://simile.mit.edu/2006/01/ontologies/mods3#Text'
+

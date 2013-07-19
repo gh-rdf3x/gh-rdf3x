@@ -1,0 +1,15 @@
+select ?name
+where {
+   ?a <isCalled> ?name .
+   ?a <type> "wordnet_actor_109765278" .
+   ?a <livesIn> ?city .
+   ?city <locatedIn> ?state .
+   ?state <locatedIn> "United_States" .
+   ?a <actedIn> ?m1 .
+   ?m1 <type> "wordnet_movie_106613686" .
+   ?m1 <producedInCountry> "Germany" .
+   ?a <directed> ?m2 .
+   ?m2 <type> "wordnet_movie_106613686" .
+   ?m2 <producedInCountry> "Canada" .
+}
+

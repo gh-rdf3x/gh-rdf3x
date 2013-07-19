@@ -1,0 +1,9 @@
+\timing
+select s1.value
+from (
+   select distinct t1.object
+   from librarything.facts t1, librarything.facts t2, librarything.facts t3, librarything.facts t4, librarything.facts t5, librarything.facts t6
+   where t1.predicate=0 and t2.predicate=1 and t3.predicate=3835 and t4.predicate=776 and t5.predicate=1 and t6.predicate=12132 and t2.subject=t1.subject and t3.object=t1.subject and t4.subject=t3.subject and t5.object=t2.object and t6.object=t5.subject
+) t, librarything.strings s1
+where t.object=s1.id;
+

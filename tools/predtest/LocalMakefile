@@ -1,0 +1,11 @@
+src_tools_predtest:=				\
+	tools/predtest/predtest.cpp
+
+$(PREFIX)predtest$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_predtest:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+
+$(PREFIX)fittest$(EXEEXT): $(addprefix $(PREFIX),tools/predtest/fittest$(OBJEXT) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT))) 
+	$(buildexe)
+
+$(PREFIX)verifypreds$(EXEEXT): $(addprefix $(PREFIX),tools/predtest/verifypreds$(OBJEXT) $(src_cts:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)))
+	$(buildexe)

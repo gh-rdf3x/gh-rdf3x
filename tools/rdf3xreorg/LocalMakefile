@@ -1,0 +1,6 @@
+src_tools_rdf3xreorg:=			\
+	tools/rdf3xreorg/rdf3xreorg.cpp
+
+$(PREFIX)rdf3xreorg$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_rdf3xreorg:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)) tools/rdf3xload/Sorter$(OBJEXT) tools/rdf3xload/TempFile$(OBJEXT))
+	$(buildexe)
+

@@ -1,0 +1,64 @@
+SYS:=$(shell uname)
+
+CXX:=g++
+CXXFLAGS:=-g -O3 -Wall -Wextra
+ifeq ($(USER),neumann)
+CXXFLAGS:=$(CXXFLAGS) -Werror
+endif
+CXXFLAGS-gtest:=-Wno-missing-field-initializers
+IFLAGS:=-Iinclude
+IFLAGS-gtest:=-Igtest/include -Igtest
+IFLAGS-test:=-Igtest/include
+OBJEXT:=.o
+EXEEXT:=
+TARGET:=-o 
+EXETARGET:=-o
+
+nativefile=$(1)
+
+define checkdir
+@mkdir -p $(dir $@)
+endef
+
+ifeq ($(CXX),icc)
+CXXFLAGS:=-g -O3
+LIBS:=-lstdc++ -lpthread
+FORCELIBS:=1
+endif
+
+ifeq ($(LINEEDITOR),)
+ifeq ($(wildcard lineeditor/LineEditor.cpp),lineeditor/LineEditor.cpp)
+LINEEDITOR:=1
+endif
+endif
+
+ifeq ($(LINEEDITOR),1)
+CXXFLAGS:=$(CXXFLAGS) -DCONFIG_LINEEDITOR
+endif
+
+ifeq ($(FORCELIBS),)
+
+LIBS:=-lpthread
+
+ifeq ($(SYS),SunOS)
+LIBS:=$(LIBS) -lsocket -lnsl
+endif
+
+ifeq ($(SYS),Darwin)
+CXXFLAGS:=$(CXXFLAGS) -DCONFIG_DARWIN -Wno-error -m64
+endif
+
+ifneq ($(SYS),Darwin)
+LIBS:=$(LIBS) -lrt
+endif
+
+ifeq ($(LINEEDITOR),1)
+LIBFILE-termcap:=-ltermcap
+endif
+
+endif
+
+define buildexe
+$(CXX) $(EXETARGET)$@ $(CXXFLAGS) $(CXXFLAGS-$(subst $(PREFIX),,$(basename $@))) $(IFLAGS) $(filter %$(OBJEXT),$^) $(foreach file,$(LIBS-$(patsubst $(PREFIX)%$(EXEEXT),%,$@)),$(LIBFILE-$(file))) $(LIBS)
+endef
+

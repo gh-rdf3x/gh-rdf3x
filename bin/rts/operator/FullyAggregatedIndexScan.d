@@ -1,0 +1,4 @@
+bin/rts/operator/FullyAggregatedIndexScan.o: rts/operator/FullyAggregatedIndexScan.cpp  include/infra/Config.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/FullyAggregatedIndexScan.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/FullyAggregatedFactsSegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/operator/FullyAggregatedIndexScan.d: rts/operator/FullyAggregatedIndexScan.cpp $(wildcard  include/infra/Config.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/FullyAggregatedIndexScan.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/FullyAggregatedFactsSegment.hpp include/rts/segment/Segment.hpp)
+

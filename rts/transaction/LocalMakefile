@@ -1,0 +1,4 @@
+src_rts_transaction:=			\
+	rts/transaction/LogAction.cpp	\
+	rts/transaction/LogManager.cpp
+

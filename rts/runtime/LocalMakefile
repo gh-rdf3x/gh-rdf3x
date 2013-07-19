@@ -1,0 +1,8 @@
+src_rts_runtime:=				\
+	rts/runtime/BulkOperation.cpp		\
+	rts/runtime/DifferentialIndex.cpp	\
+	rts/runtime/DomainDescription.cpp	\
+	rts/runtime/PredicateLockManager.cpp	\
+	rts/runtime/Runtime.cpp			\
+	rts/runtime/TemporaryDictionary.cpp
+

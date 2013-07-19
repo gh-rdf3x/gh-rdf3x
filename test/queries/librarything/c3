@@ -1,0 +1,9 @@
+select ?b
+where {
+   ?u1 <hasInterestingLibrary> ?u2 .
+   ?u2 <hasInterestingLibrary> ?u3 .
+   ?u1 <love> ?b .
+   ?u2 ?p2 ?b .
+   ?u3 ?p3 ?b .
+}
+

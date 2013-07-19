@@ -1,0 +1,4 @@
+bin/rts/runtime/BulkOperation.o: rts/runtime/BulkOperation.cpp  include/infra/Config.hpp include/infra/osdep/Latch.hpp include/infra/osdep/Mutex.hpp include/infra/util/Type.hpp include/rts/database/Database.hpp include/rts/runtime/BulkOperation.hpp include/rts/runtime/DifferentialIndex.hpp include/rts/runtime/PredicateLockManager.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/runtime/BulkOperation.d: rts/runtime/BulkOperation.cpp $(wildcard  include/infra/Config.hpp include/infra/osdep/Latch.hpp include/infra/osdep/Mutex.hpp include/infra/util/Type.hpp include/rts/database/Database.hpp include/rts/runtime/BulkOperation.hpp include/rts/runtime/DifferentialIndex.hpp include/rts/runtime/PredicateLockManager.hpp include/rts/segment/DictionarySegment.hpp include/rts/segment/Segment.hpp)
+

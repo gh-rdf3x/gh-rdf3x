@@ -1,0 +1,4 @@
+bin/rts/operator/AggregatedIndexScan.o: rts/operator/AggregatedIndexScan.cpp  include/infra/Config.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/AggregatedIndexScan.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/AggregatedFactsSegment.hpp include/rts/segment/Segment.hpp
+
+bin/rts/operator/AggregatedIndexScan.d: rts/operator/AggregatedIndexScan.cpp $(wildcard  include/infra/Config.hpp include/rts/buffer/BufferReference.hpp include/rts/database/Database.hpp include/rts/operator/AggregatedIndexScan.hpp include/rts/operator/Operator.hpp include/rts/operator/PlanPrinter.hpp include/rts/runtime/DomainDescription.hpp include/rts/runtime/Runtime.hpp include/rts/segment/AggregatedFactsSegment.hpp include/rts/segment/Segment.hpp)
+

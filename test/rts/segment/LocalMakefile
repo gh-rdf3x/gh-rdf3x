@@ -1,0 +1,3 @@
+src_test_rts_segment:=					\
+	test/rts/segment/TestSpaceInventorySegment.cpp
+

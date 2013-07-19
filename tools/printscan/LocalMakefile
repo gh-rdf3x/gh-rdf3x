@@ -1,0 +1,6 @@
+src_tools_printscan:=				\
+	tools/printscan/printscan.cpp
+
+$(PREFIX)printscan$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_printscan:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)) $(src_cts_parser:.cpp=$(OBJEXT)))
+	$(buildexe)
+

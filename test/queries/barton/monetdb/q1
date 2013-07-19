@@ -1,0 +1,2 @@
+select s.value, c from (select object, count(*) as c from p0 group by object) g, strings s where s.id=g.object;
+

@@ -1,0 +1,7 @@
+src_tools_rdf3xquery:=				\
+	tools/rdf3xquery/rdf3xquery.cpp	
+
+$(PREFIX)rdf3xquery$(EXEEXT): $(addprefix $(PREFIX),$(src_tools_rdf3xquery:.cpp=$(OBJEXT)) $(src_infra:.cpp=$(OBJEXT)) $(src_rts:.cpp=$(OBJEXT)) $(src_cts:.cpp=$(OBJEXT)) $(src_lineeditor:.cpp=$(OBJEXT)))
+	$(buildexe)
+
+LIBS-rdf3xquery:=termcap

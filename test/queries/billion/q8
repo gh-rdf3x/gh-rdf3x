@@ -1,0 +1,10 @@
+select ?a ?y
+where {
+   ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Politician110451263>.
+   ?a <http://dbpedia.org/property/years> ?y.
+   ?a <http://xmlns.com/foaf/0.1/name> ?n.
+   # ?b <http://purl.org/dc/elements/1.1/subject> ?n.
+   ?b [] ?n.
+   ?b <http://purl.org/dc/elements/1.1/subject> "Blackwater".
+}
+

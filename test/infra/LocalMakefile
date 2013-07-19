@@ -1,0 +1,5 @@
+include test/infra/osdep/LocalMakefile
+
+src_test_infra:=				\
+	$(src_test_infra_osdep)
+

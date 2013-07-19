@@ -1,0 +1,8 @@
+\timing
+select s0.value,s1.value,s2.value,s3.value
+from (
+   select f0.subject as r0,f0.object as r1,f6.object as r2,f7.object as r3
+   from billion.facts f0,billion.facts f1,billion.facts f2,billion.facts f3,billion.facts f4,billion.facts f5,billion.facts f6,billion.facts f7
+   where f0.predicate=402 and f1.subject=f0.subject and f1.predicate=78317 and f1.object=695672 and f2.subject=f0.object and f2.predicate=78317 and f2.object=695672 and f3.subject=f0.subject and f3.predicate=448 and f4.subject=f0.object and f4.predicate=448 and f4.object=f3.object and f5.subject=f3.object and f5.predicate=18 and f6.subject=f5.object and f6.predicate=51 and f7.subject=f5.object and f7.predicate=52
+) facts,billion.strings s0,billion.strings s1,billion.strings s2,billion.strings s3
+where s0.id=facts.r0 and s1.id=facts.r1 and s2.id=facts.r2 and s3.id=facts.r3;

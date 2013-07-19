@@ -1,0 +1,9 @@
+\timing
+select s1.value, s2.value
+from (
+   select t1.object as id1, t2.object as id2
+   from yago.facts t1, yago.facts t2, yago.facts t3, yago.facts t4, yago.facts t5
+   where t1.predicate=63 and t2.predicate=63 and t3.predicate=66 and t4.predicate=1 and t5.predicate=1 and t3.subject=t1.subject and t3.object=t2.subject and t4.subject=t1.subject and t5.subject=t2.subject and t5.object=t4.object
+) t, yago.strings s1, yago.strings s2
+where s1.id=t.id1 and s2.id=t.id2;
+
