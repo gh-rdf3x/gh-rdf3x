@@ -7,6 +7,7 @@
 #include "infra/osdep/MemoryMappedFile.hpp"
 #include "../rdf3xload/TempFile.hpp"
 #include "../rdf3xload/Sorter.hpp"
+#include <unistd.h>
 //---------------------------------------------------------------------------
 // RDF-3X
 // (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x

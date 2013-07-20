@@ -111,7 +111,7 @@ template <class T> template <class V> bool BTree<T>::findLeaf(BufferReference& r
    /// Navigate to a leaf node
 {
    // Traverse the B-Tree
-   ref=this->readShared(T::getRootPage());
+   ref=readShared(T::getRootPage());
    while (true) {
       const unsigned char* page=static_cast<const unsigned char*>(ref.getPage());
       // Inner node?
