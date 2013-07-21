@@ -1,15 +1,30 @@
 #ifndef H_cts_parser_SPARQLLexer
 #define H_cts_parser_SPARQLLexer
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+//         
+// Added Token Date. This represent type "dateTime" from SPARQL.
 //---------------------------------------------------------------------------
+
 #include <string>
 //---------------------------------------------------------------------------
 /// A lexer for SPARQL input

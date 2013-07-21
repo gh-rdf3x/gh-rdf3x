@@ -2,20 +2,42 @@
 #include "rts/operator/PlanPrinter.hpp"
 #include "rts/runtime/Runtime.hpp"
 #include <iostream>
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Created by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+// 
+// Implementation of the HashOptional operator. 
 //---------------------------------------------------------------------------
+
 using namespace std;
 //---------------------------------------------------------------------------
 static inline unsigned hash1(unsigned key,unsigned hashTableSize) { return key&(hashTableSize-1); }
 static inline unsigned hash2(unsigned key,unsigned hashTableSize) { return hashTableSize+((key^(key>>3))&(hashTableSize-1)); }
+
+//---------------------------------------------------------------------------
+// Name: run
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Build the hash table. Two commented in HashJoin. Always 
+//              there's join.
 //---------------------------------------------------------------------------
 void HashOptional::BuildHashTable::run()
    // Build the hash table
@@ -40,7 +62,7 @@ void HashOptional::BuildHashTable::run()
    join.hashTable.clear();
    join.hashTable.resize(2*hashTableSize);
    for (unsigned leftCount=join.left->first();leftCount;leftCount=join.left->next()) {
-      //cout << leftValue->value << endl;
+      
       // Check the domain first
       bool joinCandidate=true;
       for (unsigned index=0,limit=domainRegs.size();index<limit;++index) {
@@ -50,7 +72,7 @@ void HashOptional::BuildHashTable::run()
          }
          observedDomains[index].add(domainRegs[index]->value);
       }
-      //cout << !joinCandidate << endl;
+      
       //if (!joinCandidate)
       //   continue;
 
@@ -137,10 +159,16 @@ HashOptional::~HashOptional()
    delete left;
    delete right;
 }
+
+//---------------------------------------------------------------------------
+// Name: insert
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Insert entry in the hash table
 //---------------------------------------------------------------------------
 void HashOptional::insert(Entry* e)
    // Insert into the hash table
-{  unsigned hashTableSize=hashTable.size()/2;//cout << e->key << endl;
+{  unsigned hashTableSize=hashTable.size()/2;
    // Try to insert
    bool firstTable=true;
    for (unsigned index=0;index<hashTableSize;index++) {
@@ -160,10 +188,17 @@ void HashOptional::insert(Entry* e)
          insert(*iter);
    insert(e);
 }
+
+//---------------------------------------------------------------------------
+// Name: lookup
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Search in the hash table any key. If the tuple not exists, 
+//              this is not discarded, NULL value is concatenated.
 //---------------------------------------------------------------------------
 HashOptional::Entry* HashOptional::lookup(unsigned key)
    // Search an entry in the hash table
-{  unsigned hashTableSize=hashTable.size()/2;//cout << key << endl;
+{  unsigned hashTableSize=hashTable.size()/2;
    Entry* e=hashTable[hash1(key,hashTableSize)];
    if (e&&(e->key==key))
       return e;
@@ -194,7 +229,6 @@ unsigned HashOptional::first()
       return false;
 
    // Setup the lookup
-   //cout << rightValue->value << endl;
    hashTableIter=lookup(rightValue->value);
 
    return next();
@@ -219,15 +253,20 @@ unsigned HashOptional::next()
          observedOutputCardinality+=count;
          return count;
       }
-      //cout << rightValue->value << endl;
+
       // Read the next tuple from the right
       if ((rightCount=right->next())==0)
          return false;
-      //cout << rightValue->value << endl; 
 
       hashTableIter=lookup(rightValue->value);
    }
 }
+
+//---------------------------------------------------------------------------
+// Name: print
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Print the HashOptional tree. 
 //---------------------------------------------------------------------------
 void HashOptional::print(PlanPrinter& out)
    // Print the operator tree. Debugging only.
@@ -246,6 +285,7 @@ void HashOptional::addMergeHint(Register* /*reg1*/,Register* /*reg2*/)
 {
    // Do not propagate as we break the pipeline
 }
+
 //---------------------------------------------------------------------------
 void HashOptional::getAsyncInputCandidates(Scheduler& scheduler)
    // Register parts of the tree that can be executed asynchronous

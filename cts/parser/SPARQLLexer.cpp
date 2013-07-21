@@ -5,14 +5,28 @@ using namespace std;
 
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
-//---------------------------------------------------------------------------
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+//         
+// Added Token Date. This represent type "dateTime" from SPARQL.
+//--------------------------------------------------------------------------
+
 SPARQLLexer::SPARQLLexer(const std::string& input)
    : input(input),pos(this->input.begin()),tokenStart(pos),tokenEnd(pos),
      putBack(None),hasTokenEnd(false)
@@ -24,6 +38,20 @@ SPARQLLexer::~SPARQLLexer()
    // Destructor
 {
 }
+
+
+//---------------------------------------------------------------------------
+// Name: getNext
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Get the next token. In the modification, we added the token
+//              for the type dateTime but the syntax is not like SPARQL defi-
+//              nition. Syntax for this dateTime type is 0000Y00M00D where:
+//              4 digits are any year.
+//              Character Y for Year
+//              2 digits are months in number syntax with the zero.
+//              Character M for Month.
+//              2 digits are days in number syntax with the zero.  
 //---------------------------------------------------------------------------
 SPARQLLexer::Token SPARQLLexer::getNext()
    // Get the next token

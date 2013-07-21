@@ -7,6 +7,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <map>
+using namespace std;
+
 //---------------------------------------------------------------------------
 // RDF-3X
 // Created by: 
@@ -34,11 +36,6 @@
 // for both engines (PostgreSQL and MonetDB)
 //---------------------------------------------------------------------------
 
-
-
-using namespace std;
-
-//---------------------------------------------------------------------------
 static string readInput(istream& in) {
 // Read the input query 
   string result;
@@ -73,10 +70,9 @@ static string databaseName(const char* fileName) {
   return string(start,stop);
 }
 
-
 //---------------------------------------------------------------------------
 // Name: set2map
-// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Created by: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: Auxiliar function used for translatePostgres 
 //---------------------------------------------------------------------------
@@ -90,7 +86,7 @@ static void set2map(set<unsigned> var, map<unsigned,unsigned>& var2pos) {
 
 //---------------------------------------------------------------------------
 // Name: getVariables
-// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Created by: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: Get variables for the filters 
 //---------------------------------------------------------------------------
@@ -282,7 +278,7 @@ static void translateFilterPostgres(QueryGraph::Filter filter, map<unsigned,unsi
 
 //---------------------------------------------------------------------------
 // Name: translateSubQueryPostgres
-// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: For a given QueryGraph with no optionals or unions
 //              make the translation to the schema of
@@ -666,7 +662,7 @@ static void translatePostgres(QueryGraph& query, QueryGraph::SubQuery subquery, 
 }
 //---------------------------------------------------------------------------
 // Name: dumpPostgres
-// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: This is an modification for the original function.
 //              For a given QueryGraph returns a equivalent query
@@ -830,7 +826,7 @@ static void translateFilterMonetDB(QueryGraph::Filter filter, map<unsigned,strin
 }
 //---------------------------------------------------------------------------
 // Name: translateSubQueryMonetDB
-// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: For a given QueryGraph with no optionals or unions
 //              make the translation to the property table schema of
@@ -936,7 +932,6 @@ static void translateSubQueryMonetDB(QueryGraph& query, QueryGraph::SubQuery sub
 // Authors: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: Build the body of the optional translation 
-// 
 //---------------------------------------------------------------------------
 static void translateSubQueryOptionalMonetDB(QueryGraph& query, QueryGraph::SubQuery subquery, unsigned& f, unsigned& r, map<unsigned,unsigned>& projection,set<unsigned> optionalvars) {
 
@@ -1178,7 +1173,7 @@ static void translateMonetDB(QueryGraph& query, QueryGraph::SubQuery subquery){
 
 //---------------------------------------------------------------------------
 // Name: dumpMonetDB
-// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
 // Description: This is an modification for the original function.
 //              For a given QueryGraph returns a equivalent query

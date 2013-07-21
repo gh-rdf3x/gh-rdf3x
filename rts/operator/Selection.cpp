@@ -18,19 +18,35 @@
 #endif*/
 #include <regex.h>
 #include <time.h>
+using namespace std;
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Created by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+// 
+// Many bugs were fixed: lang, langMatches, bound, relational operators.
+// Added comparations with between dates and selection with regular 
+// expressions.
+// Note: Regular expression accepted is the search of pattern.
 //---------------------------------------------------------------------------
-using namespace std;
-//using namespace boost;
-//---------------------------------------------------------------------------
+
 Selection::Result::~Result()
    // Destructor
 {
@@ -218,6 +234,12 @@ string Selection::And::print(PlanPrinter& out)
 {
    return "("+left->print(out)+")&&("+right->print(out)+")";
 }
+
+//---------------------------------------------------------------------------
+// Name: eval
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Evaluate the equal operator with dates. 
 //---------------------------------------------------------------------------
 void Selection::Equal::eval(Result& result)
    // Evaluate the predicate
@@ -258,6 +280,12 @@ string Selection::Equal::print(PlanPrinter& out)
 {
    return "("+left->print(out)+")==("+right->print(out)+")";
 }
+
+//---------------------------------------------------------------------------
+// Name: eval
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Evaluate the not equal operator with dates. 
 //---------------------------------------------------------------------------
 void Selection::NotEqual::eval(Result& result)
    // Evaluate the predicate
@@ -297,6 +325,13 @@ string Selection::NotEqual::print(PlanPrinter& out)
 {
    return "("+left->print(out)+")!=("+right->print(out)+")";
 }
+
+//---------------------------------------------------------------------------
+// Name: eval
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Evaluate the less operator with dates.
+// Bug: Cast string to int.
 //---------------------------------------------------------------------------
 void Selection::Less::eval(Result& result)
    // Evaluate the predicate
@@ -343,6 +378,13 @@ string Selection::Less::print(PlanPrinter& out)
 {
    return "("+left->print(out)+")<("+right->print(out)+")";
 }
+
+//---------------------------------------------------------------------------
+// Name: eval
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Evaluate the less or equal operator with dates.
+// Bug: Cast string to int.
 //---------------------------------------------------------------------------
 void Selection::LessOrEqual::eval(Result& result)
    // Evaluate the predicate
@@ -723,7 +765,6 @@ void Selection::BuiltinBound::eval(Result& result)
 string Selection::BuiltinBound::print(PlanPrinter& out)
    // Print the predicate (debugging only)
 {
-   //return "bound("+out.formatRegister(reg)+")";
    return "bound("+input->print(out)+")";
 }
 //---------------------------------------------------------------------------
@@ -825,6 +866,13 @@ void Selection::BuiltinRegEx::setSelection(Selection* s)
    arg2->setSelection(s);
    if (arg3) arg3->setSelection(s);
 }
+
+//---------------------------------------------------------------------------
+// Name: eval
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Evaluate the regex function with dates. This is not consider
+//              all forms of regular expression, only pattern search.
 //---------------------------------------------------------------------------
 void Selection::BuiltinRegEx::eval(Result& result)
    // Evaluate the predicate

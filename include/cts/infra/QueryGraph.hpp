@@ -1,15 +1,30 @@
 #ifndef H_cts_infra_QueryGraph
 #define H_cts_infra_QueryGraph
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+//         
+// Added node in QueryGraph for the GJOIN clause.
 //---------------------------------------------------------------------------
+
 #include <vector>
 #include <string>
 #include <set>
@@ -103,7 +118,7 @@ class QueryGraph
       std::vector<SubQuery> optional;
       /// Union subqueries
       std::vector<std::vector<SubQuery> > unions;
-      /// Gjoin subqueries - Hancel Y Giuseppe
+      /// Gjoin subqueries - Hancel & Giuseppe
       std::vector<std::vector<SubQuery> > gjoins;
       /// The table functions
       std::vector<TableFunction> tableFunctions;

@@ -1,15 +1,30 @@
 #ifndef H_cts_plangen_PlanGen
 #define H_cts_plangen_PlanGen
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+//  
+// Added functions that construct plans for graph pattern with OPTIONAL clause.
 //---------------------------------------------------------------------------
+
 #include "cts/plangen/Plan.hpp"
 #include "cts/infra/BitSet.hpp"
 #include "cts/infra/QueryGraph.hpp"
@@ -55,11 +70,10 @@ class PlanGen
    /// Build the informaion about a join
    JoinDescription buildJoinInfo(const QueryGraph::SubQuery& query,const QueryGraph::Edge& edge);
    /// Generate an optional part
-   //Problem* buildOptional(const QueryGraph::SubQuery& query,const QueryGraph::SubQuery& subquery,unsigned id);
    Problem* buildOptional(const QueryGraph::SubQuery& query,unsigned id);
    /// Generate a union part
    Problem* buildUnion(const std::vector<QueryGraph::SubQuery>& query,unsigned id);
-   /// Generate a gjoin part - Hancel y Giuseppe
+   /// Generate a gjoin part - Hancel & Giuseppe
    Problem*buildGJoin(const std::vector<QueryGraph::SubQuery>& query,unsigned id);
    /// Generate a table function access
    Problem* buildTableFunction(const QueryGraph::TableFunction& function,unsigned id);
@@ -70,7 +84,7 @@ class PlanGen
    /// Translate a query into an operator tree
    Plan* translate(const QueryGraph::SubQuery& query);
 
-   /// Translate a query into an operator tree
+   /// Translate a query into an operator tree. Used only when there is OPTIONAL. - Hancel & Giuseppe
    Plan* translate2(const QueryGraph::SubQuery& query);
 
    public:

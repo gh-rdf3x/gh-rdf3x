@@ -3,19 +3,34 @@
 #include <memory>
 #include <cstdlib>
 #include <iostream>
+using namespace std;
 
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+//
+// Added rules for GJOIN group graph pattern and OPTIONAL group graph pattern.
+// This parser consider GJOIN and OPTIONAL clause in the AST. Also, this con-
+// sider rules for the 'dateTime' type.
 //---------------------------------------------------------------------------
-using namespace std;
-//---------------------------------------------------------------------------
+
 SPARQLParser::ParserException::ParserException(const string& message)
   : message(message)
    // Constructor
@@ -390,6 +405,12 @@ SPARQLParser::Filter* SPARQLParser::parseBuiltInCall(std::map<std::string,unsign
    }
    return result.release();
 }
+
+//---------------------------------------------------------------------------
+// Name: parsePrimaryExpression
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Added rules for the dateTime type.
 //---------------------------------------------------------------------------
 SPARQLParser::Filter* SPARQLParser::parsePrimaryExpression(map<string,unsigned>& localVars)
    // Parse a "PrimaryExpression" production
@@ -777,14 +798,6 @@ SPARQLParser::Element SPARQLParser::parsePatternElement(PatternGroup& group,map<
       if (prefix=="a") {
          result.type=Element::IRI;
          result.value="http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
-/*      } else if (lexer.isKeyword("order")) {
-         lexer.unget(token);
-         return result;
-         //parseOrderBy();
-      } else if (lexer.isKeyword("limit")) {
-         lexer.unget(token);
-         return result;
-         //parseLimit();*/
       } else {
          // prefix:suffix
          if (lexer.getNext()!=SPARQLLexer::Colon)
@@ -842,6 +855,12 @@ void SPARQLParser::parseGraphPattern(PatternGroup& group)
       }
    }
 }
+
+//---------------------------------------------------------------------------
+// Name: parseGroupGraphPattern
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Added rules for the GJOIN and OPTIONAL clauses.
 //---------------------------------------------------------------------------
 void SPARQLParser::parseGroupGraphPattern(PatternGroup& group)
    // Parse a group of patterns
