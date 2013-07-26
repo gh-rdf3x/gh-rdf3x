@@ -9,16 +9,31 @@
 #include <set>
 #include <algorithm>
 #include <iostream>
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+//  
+// Implementation that consider OPTIONAL and GJOIN clause. in the Query Plan.
 //---------------------------------------------------------------------------
+
 using namespace std;
 //---------------------------------------------------------------------------
 // XXX integrate DPhyper-based optimization, query path statistics
@@ -405,13 +420,19 @@ PlanGen::JoinDescription PlanGen::buildJoinInfo(const QueryGraph::SubQuery& quer
 }
 
 //---------------------------------------------------------------------------
+// Name: buildOptional 
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Construct the part of query plan for the OPTIONAL clause. 
+//              This apply the HashOptional operator.
+//---------------------------------------------------------------------------
 PlanGen::Problem* PlanGen::buildOptional(const QueryGraph::SubQuery& query,unsigned id)
    // Generate an optional part
 {
    // Solve the subproblem
    Plan* p=translate2(query);
    vector<Plan*> parts;
-   //cout << p << endl; 
+   
    for (unsigned index=0;index<query.optional.size();index++) {
       Plan* q=translate(query.optional[index]),*bp=q;
       for (Plan* iter=q;iter;iter=iter->next)
@@ -430,9 +451,8 @@ PlanGen::Problem* PlanGen::buildOptional(const QueryGraph::SubQuery& query,unsig
    result->plans=0;
    result->relations=BitSet();
    result->relations.set(id);
-//   p->print(6);
+
    // And create a optional operator
-   //Plan* last=plans.alloc();
    Plan* last=plans.alloc();
    last->op=Plan::HashOptional;
    last->opArg=0;
@@ -442,7 +462,8 @@ PlanGen::Problem* PlanGen::buildOptional(const QueryGraph::SubQuery& query,unsig
    last->costs=costs;
    last->ordering=~0u;
    last->next=0;
-  // cout <<parts.size() << endl;
+  
+   // OPTIONAL is a left associative operator.
    for (unsigned index=0;index<parts.size();index++) {
       last->right=parts[index];
       if(index + 1 == parts.size())
@@ -450,9 +471,6 @@ PlanGen::Problem* PlanGen::buildOptional(const QueryGraph::SubQuery& query,unsig
       Plan* nextPlan=plans.alloc();
       nextPlan->op=Plan::HashOptional;
       nextPlan->opArg=0;
-      //nextPlan->left=last->right;
-      //last->right=nextPlan;
-      //last=nextPlan;
       nextPlan->left=last;
       nextPlan->cardinality=last->left->cardinality;
       nextPlan->costs=last->left->costs;
@@ -674,7 +692,15 @@ static void findFilters(Plan* plan,set<const QueryGraph::Filter*>& filters)
          break;
    }
 }
-//--------------------------------------------------------------------------- Hancel y Giuseppe
+
+//---------------------------------------------------------------------------
+// Name: buildGjoin
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Construct the part of query plan for the GJOIN clause. 
+//              This apply the HashJoin operator. 
+//              Note: GJOIN is a binary operator.
+//---------------------------------------------------------------------------
 PlanGen::Problem* PlanGen::buildGJoin(const vector<QueryGraph::SubQuery>& query,unsigned id)
 {
    // Solve the subproblems
@@ -705,7 +731,7 @@ PlanGen::Problem* PlanGen::buildGJoin(const vector<QueryGraph::SubQuery>& query,
 
    // And create a gjoin operator
    Plan* last=plans.alloc();
-   last->op=Plan::HashJoin;   // Hancel y Giuseppe (by Tomas)
+   last->op=Plan::HashJoin;
    last->opArg=0;
    last->left=parts[0];
    last->right=parts[1];
@@ -717,6 +743,13 @@ PlanGen::Problem* PlanGen::buildGJoin(const vector<QueryGraph::SubQuery>& query,
 
    return result;
 }
+
+//---------------------------------------------------------------------------
+// Name: translate
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Create the query plan for a graph pattern. This consider 
+//              OPTIONAL and GJOIN clause.
 //---------------------------------------------------------------------------
 Plan* PlanGen::translate(const QueryGraph::SubQuery& query)
    // Translate a query into an operator tree
@@ -1019,10 +1052,18 @@ Plan* PlanGen::translate(const QueryGraph::SubQuery& query)
    // Return the complete plan   
    return plan;
 }
+
+//---------------------------------------------------------------------------
+// Name: translate2
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Create the query plan for a graph pattern. This consider 
+//              OPTIONAL and GJOIN clause. This function is used when exists
+//              optional graph patter.
 //---------------------------------------------------------------------------
 Plan* PlanGen::translate2(const QueryGraph::SubQuery& query)
    // Translate a query into an operator tree
-{  //cout << query.nodes.size() << endl;
+{  
    bool singletonNeeded=(!(query.nodes.size()+query.optional.size()+query.unions.size()+query.gjoins.size()))&&query.tableFunctions.size();
 
    // Check if we could handle the query
@@ -1042,31 +1083,7 @@ Plan* PlanGen::translate2(const QueryGraph::SubQuery& query)
          dpTable[0]=p;
       last=p;
    }
-/*   
-   if (query.optional.size()) {
-      Problem* p=buildOptional(query,id);
-      if (last)
-         last->next=p; else
-         dpTable[0]=p;
-      last=p;
-   }
-   
-   for (vector<vector<QueryGraph::SubQuery> >::const_iterator iter=query.unions.begin(),limit=query.unions.end();iter!=limit;++iter,++id) {
-      Problem* p=buildUnion(*iter,id);
-      if (last)
-         last->next=p; else
-         dpTable[0]=p;
-      last=p;
-   }
-   // Hancel y Giuseppe
-   for (vector<vector<QueryGraph::SubQuery> >::const_iterator iter=query.gjoins.begin(),limit=query.gjoins.end();iter!=limit;++iter,++id) {
-      Problem* p=buildGJoin(*iter,id);
-      if (last)
-         last->next=p; else
-         dpTable[0]=p;
-      last=p;
-   }
-*/
+
    unsigned functionIds=id;
    for (vector<QueryGraph::TableFunction>::const_iterator iter=query.tableFunctions.begin(),limit=query.tableFunctions.end();iter!=limit;++iter,++id) {
       Problem* p=buildTableFunction(*iter,id);
@@ -1299,24 +1316,6 @@ Plan* PlanGen::translate2(const QueryGraph::SubQuery& query)
    
    if (!plan)
       return 0;
-
-/*   // Add all remaining filters
-   set<const QueryGraph::Filter*> appliedFilters;
-   findFilters(plan,appliedFilters);
-   for (vector<QueryGraph::Filter>::const_iterator iter=query.filters.begin(),limit=query.filters.end();iter!=limit;++iter)
-      if (!appliedFilters.count(&(*iter))) {
-         Plan* p=plans.alloc();
-         p->op=Plan::Filter;
-         p->opArg=0;
-         p->left=plan;
-         p->right=reinterpret_cast<Plan*>(const_cast<QueryGraph::Filter*>(&(*iter)));
-	 p->next=0;
-         p->cardinality=plan->cardinality; // XXX real computation
-         p->costs=plan->costs;
-         p->ordering=plan->ordering;
-         plan=p;
-      }*/
-
 
    // Return the complete plan   
    return plan;

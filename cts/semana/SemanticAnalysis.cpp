@@ -10,16 +10,31 @@
 #include <cstdlib>
 #include <iostream>
 using namespace std;
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+// 
+// Encode all the GJOIN parts from SPARQLParser to QueryGraph.  
 //---------------------------------------------------------------------------
+
 /// ID used for table functions
 static const char tableFunctionId[] = "http://www.mpi-inf.mpg.de/rdf3x/tableFunction";
 //---------------------------------------------------------------------------
@@ -316,6 +331,11 @@ static void encodeTableFunction(const SPARQLParser::PatternGroup& /*group*/,cons
       func.output[index-2-inputArgs]=args[index]->valueArg;
 }
 //---------------------------------------------------------------------------
+// Name: transformSubquery
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Encode gjoin parts.
+//---------------------------------------------------------------------------
 static bool transformSubquery(DictionarySegment& dict,DifferentialIndex* diffIndex,const SPARQLParser::PatternGroup& group,QueryGraph::SubQuery& output)
    // Transform a subquery
 {  
@@ -371,7 +391,7 @@ static bool transformSubquery(DictionarySegment& dict,DifferentialIndex* diffInd
       output.unions.push_back(unionParts);
    }
 
-   // Encode all gjoin parts - Hancel y Giuseppe
+   // Encode all gjoin parts - Hancel & Giuseppe
    for (std::vector<std::vector<SPARQLParser::PatternGroup> >::const_iterator iter=group.gjoins.begin(),limit=group.gjoins.end();iter!=limit;++iter) {
       std::vector<QueryGraph::SubQuery> gjoinParts;
       for (std::vector<SPARQLParser::PatternGroup>::const_iterator iter2=(*iter).begin(),limit2=(*iter).end();iter2!=limit2;++iter2) {

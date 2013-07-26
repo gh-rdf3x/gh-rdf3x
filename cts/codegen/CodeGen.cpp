@@ -27,16 +27,31 @@
 #include <cassert>
 #include <iostream>
 using namespace std;
+
 //---------------------------------------------------------------------------
 // RDF-3X
-// (c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+// Created by: 
+//         Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x
+//         (c) 2008 
 //
 // This work is licensed under the Creative Commons
 // Attribution-Noncommercial-Share Alike 3.0 Unported License. To view a copy
 // of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 // or send a letter to Creative Commons, 171 Second Street, Suite 300,
 // San Francisco, California, 94105, USA.
+// 
+//  -----------------------------------------------------------------------
+//
+// Modified by:
+//         Giuseppe De Simone and Hancel Gonzalez
+//         Advisor: Maria Esther Vidal
+//         
+// Universidad Simon Bolivar
+// 2013,   Caracas - Venezuela.
+// 
+// Code generator was modified for to consider the HashOptional operator.
 //---------------------------------------------------------------------------
+
 using namespace std;
 //---------------------------------------------------------------------------
 static Operator* translatePlan(Runtime& runtime,const map<unsigned,Register*>& context,const set<unsigned>& projection,map<unsigned,Register*>& bindings,const map<const QueryGraph::Node*,unsigned>& registers,Plan* plan);
@@ -133,6 +148,13 @@ static Operator* translateFullyAggregatedIndexScan(Runtime& runtime,const map<un
                                            object,constObject,
 					   plan->cardinality);
 }
+
+//---------------------------------------------------------------------------
+// Name: collectVariables
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Collect variables contained in a plan. This consider plan 
+//              with HashOperator.
 //---------------------------------------------------------------------------
 static void collectVariables(const map<unsigned,Register*>& context,set<unsigned>& variables,Plan* plan)
    // Collect all variables contained in a plan
@@ -324,6 +346,12 @@ static Operator* translateHashJoin(Runtime& runtime,const map<unsigned,Register*
 
    return result;
 }
+
+//---------------------------------------------------------------------------
+// Name: translateHashOptional
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Translate a optional plan into an operator tree.
 //---------------------------------------------------------------------------
 static Operator* translateHashOptional(Runtime& runtime,const map<unsigned,Register*>& context,const set<unsigned>& projection,map<unsigned,Register*>& bindings,const map<const QueryGraph::Node*,unsigned>& registers,Plan* plan)
    // Translate a optional into an operator tree
@@ -628,6 +656,13 @@ static Operator* translateTableFunction(Runtime& runtime,const map<unsigned,Regi
 
    return result;
 }
+
+//---------------------------------------------------------------------------
+// Name: translatePlan
+// Modified by: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description:  Translate a plan into an operator tree. This consider plans
+//               with HashOptional operator.
 //---------------------------------------------------------------------------
 static Operator* translatePlan(Runtime& runtime,const map<unsigned,Register*>& context,const set<unsigned>& projection,map<unsigned,Register*>& bindings,const map<const QueryGraph::Node*,unsigned>& registers,Plan* plan)
    // Translate a plan into an operator tree
