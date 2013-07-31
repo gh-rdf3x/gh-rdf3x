@@ -138,7 +138,8 @@ int main(int argc,char* argv[])
 
    // Greeting
    cerr << "RDF-3X query interface" << endl
-        << "(c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x" << endl;
+        << "(c) 2008 Thomas Neumann. Web site: http://www.mpi-inf.mpg.de/~neumann/rdf3x" 
+				<< "(c) 2013 Hancel Gonzalez and Giuseppe De Simone. Web site: http://github.com/gh-rdf3x/gh-rdf3x" << endl;
 
    // Check the arguments
    if ((argc!=2)&&(argc!=3)) {
