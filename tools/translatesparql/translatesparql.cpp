@@ -171,6 +171,21 @@ static void getOptionalsVariables(vector<QueryGraph::SubQuery> subqueries, set<u
 }
 
 //---------------------------------------------------------------------------
+// Name: join
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Join the sets set1 and set2,
+//              the union is saved in the set join
+//--------------------------------------------------------------------------
+static void join(set<unsigned> set1, set<unsigned> set2, set<unsigned>& join) {
+    //Join two sets and storage union in another set variable
+    for(set<unsigned>::iterator iter=set2.begin(),limit=set2.end();iter!=limit;++iter)
+        join.insert(*iter);
+    for(set<unsigned>::iterator iter=set1.begin(),limit=set1.end();iter!=limit;++iter)
+        join.insert(*iter);
+}
+
+//---------------------------------------------------------------------------
 // Name: intersect
 // Authors: Giuseppe De Simone and Hancel Gonzalez
 // Advisor: Maria Esther Vidal
@@ -1129,6 +1144,193 @@ static void translateOptionalMonetDB(QueryGraph& query, QueryGraph::SubQuery sub
    cout  << endl;
 }
 
+struct pattern {
+	struct variables {
+		set<unsigned> vars, commons;
+
+		variables() {
+			vars.clear();
+			commons.clear();
+		}
+
+		~variables() {
+		}
+	};
+
+	public:
+	variables *vars;
+	pattern *arg1, *arg2;
+
+	pattern(){
+		vars = new variables;
+		arg1 = NULL;
+		arg2 = NULL;
+	}
+};
+
+static void query2structure(QueryGraph::SubQuery query, pattern *structure) {
+	if (query.gjoins.empty()) {
+		getVariables(query,structure->vars->vars);
+	}
+	else {
+		structure->arg1 = new pattern;
+		structure->arg2 = new pattern;
+		query2structure(query.gjoins[0][0],structure->arg1);
+		query2structure(query.gjoins[0][1],structure->arg2);
+		join(structure->arg1->vars->vars,structure->arg2->vars->vars,structure->vars->vars);
+		intersect(structure->arg1->vars->vars,structure->arg2->vars->vars,structure->vars->commons);
+	}
+}
+
+static void translateSubQueryMonetDB(QueryGraph::SubQuery subquery, pattern *structure, set<unsigned> common, unsigned tab) {
+
+  // dictionary with the nodes elements
+  map <unsigned, string> representative;
+
+  {
+    unsigned id=0;
+    for (vector<QueryGraph::Node>::const_iterator iter=subquery.nodes.begin(),limit=subquery.nodes.end();iter!=limit;++iter) {
+      if ((!(*iter).constSubject)&&(!representative.count((*iter).subject)))
+				representative[(*iter).subject]=buildFactsAttribute(id,"subject");
+      if ((!(*iter).constPredicate)&&(!representative.count((*iter).predicate)))
+				representative[(*iter).predicate]=buildFactsAttribute(id,"predicate");
+      if ((!(*iter).constObject)&&(!representative.count((*iter).object)))
+				representative[(*iter).object]=buildFactsAttribute(id,"object");
+      ++id;
+    }
+  }
+
+	for (unsigned t = 0 ; t < tab ; t++)
+		cout << "  ";
+
+  cout << "(select ";
+  {
+    unsigned i=0;
+    for (set<unsigned>::const_iterator iter=structure->vars->vars.begin(),limit=structure->vars->vars.end();iter!=limit;++iter) {      
+			if (i) cout << ",";
+			cout << representative[*iter] << " as " << "r" << *iter;
+			i = 1; 
+		}
+		for (set<unsigned>::const_iterator iter=common.begin(),limit=common.end();iter!=limit;++iter) {      
+			cout << "," << representative[*iter] << " as " << "q" << *iter;
+		}
+	}
+
+  cout << endl;
+	for (unsigned t = 0 ; t < tab ; t++)
+		cout << "  ";
+  cout << " from ";
+
+  {
+    unsigned id=0;
+    for (vector<QueryGraph::Node>::const_iterator iter=subquery.nodes.begin(),limit=subquery.nodes.end();iter!=limit;++iter) {
+      if (id) cout << ",";
+      if ((*iter).constPredicate)
+	cout << "p" << (*iter).predicate << " f" << id; else
+	cout << "allproperties f" << id;
+      ++id;
+    }
+  }
+  cout << endl;
+ for (unsigned t = 0 ; t < tab ; t++)
+		cout << "  ";
+
+ if (!subquery.edges.empty() || 
+     !subquery.filters.empty() || 
+     (subquery.edges.empty() && ((*subquery.nodes.begin()).constSubject ||
+                                 (*subquery.nodes.begin()).constObject))) 
+	cout << " where ";
+ {
+    unsigned id=0; bool first=true;
+    for (vector<QueryGraph::Node>::const_iterator iter=subquery.nodes.begin(),limit=subquery.nodes.end();iter!=limit;++iter) {
+      string s=buildFactsAttribute(id,"subject"),p=buildFactsAttribute(id,"predicate"),o=buildFactsAttribute(id,"object");
+      if ((*iter).constSubject) {
+	if (first) first=false; else cout << " and ";
+	cout << s << "=" << (*iter).subject;
+      } else if (representative[(*iter).subject]!=s) {
+	if (first) first=false; else cout << " and ";
+	cout << s << "=" << representative[(*iter).subject];
+      }
+      if ((*iter).constPredicate) {
+      } else if (representative[(*iter).predicate]!=p) {
+	if (first) first=false; else cout << " and ";
+	cout << p << "=" << representative[(*iter).predicate];
+      }
+      if ((*iter).constObject) {
+	if (first) first=false; else cout << " and ";
+	cout << o << "=" << (*iter).object;
+      } else if (representative[(*iter).object]!=o) {
+	if (first) first=false; else cout << " and ";
+	cout << o << "=" << representative[(*iter).object];
+      }
+      ++id;
+    }
+  }   
+  if (subquery.filters.size())
+    //Finally, translate filters.
+		if (!subquery.edges.empty()) cout << " and ";
+		unsigned i = 0;
+    for(vector<QueryGraph::Filter>::iterator iter = subquery.filters.begin(), limit = subquery.filters.end() ; iter != limit ; iter++) {
+      if (i) cout << " and "; 
+      translateFilterMonetDB(*iter,representative);
+			i++;
+    }
+  
+ cout << ")";
+}
+
+
+static void translateGJoinMonetDB(pattern *structure, QueryGraph::SubQuery query, set<unsigned> common, unsigned tab) {
+	if(query.gjoins.empty()) {
+		translateSubQueryMonetDB(query,structure,common,tab);
+	}
+	else {
+		for (unsigned t = 0 ; t < tab ; t++)
+			cout << "  ";
+		cout << "(select ";
+	  {
+  	  unsigned i=0;
+	    for (set<unsigned>::const_iterator iter=structure->vars->vars.begin(),limit=structure->vars->vars.end();iter!=limit;++iter) {      
+				if (i) cout << ",";
+
+				if (structure->arg1->vars->vars.count(*iter))
+					cout << "p1";
+				else
+					cout << "p2";
+
+				cout << ".r" << *iter << " as " << "r" << *iter;
+				i = 1; 
+			}
+			for (set<unsigned>::const_iterator iter=common.begin(),limit=common.end();iter!=limit;++iter) {      
+				cout << ",";
+				if (structure->arg1->vars->vars.count(*iter))
+					cout << "p1";
+				else
+					cout << "p2";
+				cout << ".r" << *iter << " as " << "q" << *iter;
+			}
+		}
+		cout << endl;
+		for (unsigned t = 0 ; t < tab ; t++)
+			cout << "  ";
+		cout << " from " << endl;
+		translateGJoinMonetDB(structure->arg1,query.gjoins[0][0],structure->vars->commons,tab+1);
+		cout << " p1," << endl;
+		translateGJoinMonetDB(structure->arg2,query.gjoins[0][1],structure->vars->commons,tab+1);
+		cout << " p2 " << endl;
+		for (unsigned t = 0 ; t < tab ; t++)
+			cout << "  ";
+		cout << " where ";
+		unsigned i = 0;
+		for (set<unsigned>::const_iterator iter=structure->vars->commons.begin(),limit=structure->vars->commons.end();iter!=limit;++iter) {
+			if (i) cout << "and";
+			cout << "p1.q" << *iter << " = " << "p2.q" << *iter;
+			i = 1;
+		}
+		cout << ")";
+	}
+}
+
 //---------------------------------------------------------------------------
 // Name: translateMonetDB
 // Authors: Giuseppe De Simone and Hancel Gonzalez
@@ -1143,9 +1345,17 @@ static void translateMonetDB(QueryGraph& query, QueryGraph::SubQuery subquery){
   
   // No optional, No Union
   if(!subquery.optional.size() && !subquery.unions.size()) {
-    translateSubQueryMonetDB(query, subquery, projection, set<unsigned>(), null);
+		// No gjoin
+		if (subquery.gjoins.empty())
+	    translateSubQueryMonetDB(query, subquery, projection, set<unsigned>(), null);
+		// Gjoin clause
+		else {
+			pattern *structure;
+			structure = new pattern;
+			query2structure(query.getQuery(),structure);	
+			translateGJoinMonetDB(structure,query.getQuery(),set<unsigned>(),1);
+		}
   }
-
   // Union clause 
   else if(!subquery.optional.size() && subquery.unions.size() == 1) {
     translateUnionMonetDB(query, subquery.unions[0],projection, set<unsigned>());
