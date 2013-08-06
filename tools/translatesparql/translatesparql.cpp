@@ -235,6 +235,44 @@ static void onOptional(set<unsigned> commons, unsigned fact_ini, unsigned fact) 
   cout << ")";
 }
 
+struct pattern {
+	struct variables {
+		set<unsigned> vars, commons;
+
+		variables() {
+			vars.clear();
+			commons.clear();
+		}
+
+		~variables() {
+		}
+	};
+
+	public:
+	variables *vars;
+	pattern *arg1, *arg2;
+
+	pattern(){
+		vars = new variables;
+		arg1 = NULL;
+		arg2 = NULL;
+	}
+};
+
+static void query2structure(QueryGraph::SubQuery query, pattern *structure) {
+	if (query.gjoins.empty()) {
+		getVariables(query,structure->vars->vars);
+	}
+	else {
+		structure->arg1 = new pattern;
+		structure->arg2 = new pattern;
+		query2structure(query.gjoins[0][0],structure->arg1);
+		query2structure(query.gjoins[0][1],structure->arg2);
+		join(structure->arg1->vars->vars,structure->arg2->vars->vars,structure->vars->vars);
+		intersect(structure->arg1->vars->vars,structure->arg2->vars->vars,structure->vars->commons);
+	}
+}
+
 //---------------------------------------------------------------------------
 // Name: translateFilterPostgres
 // Authors: Giuseppe De Simone and Hancel Gonzalez
@@ -649,6 +687,169 @@ static void translateOptionalPostgres(QueryGraph& query, QueryGraph::SubQuery su
   }
 }
 
+static void translateSubQueryPostgres(QueryGraph::SubQuery subquery, pattern *structure, set<unsigned> common, unsigned tab, const string& schema) {
+
+  // dictionary with the nodes elements
+  map <unsigned, string> representative;
+
+  {
+    unsigned id=0;
+    for (vector<QueryGraph::Node>::const_iterator iter=subquery.nodes.begin(),limit=subquery.nodes.end();iter!=limit;++iter) {
+      if ((!(*iter).constSubject)&&(!representative.count((*iter).subject)))
+				representative[(*iter).subject]=buildFactsAttribute(id,"subject");
+      if ((!(*iter).constPredicate)&&(!representative.count((*iter).predicate)))
+				representative[(*iter).predicate]=buildFactsAttribute(id,"predicate");
+      if ((!(*iter).constObject)&&(!representative.count((*iter).object)))
+				representative[(*iter).object]=buildFactsAttribute(id,"object");
+      ++id;
+    }
+  }
+
+	for (unsigned t = 0 ; t < tab ; t++)
+		cout << "  ";
+
+  cout << "(select ";
+  {
+    unsigned i=0;
+    for (set<unsigned>::const_iterator iter=structure->vars->vars.begin(),limit=structure->vars->vars.end();iter!=limit;++iter) {      
+			if (i) cout << ",";
+			cout << representative[*iter] << " as " << "r" << *iter;
+			i = 1; 
+		}
+		for (set<unsigned>::const_iterator iter=common.begin(),limit=common.end();iter!=limit;++iter) {      
+			cout << "," << representative[*iter] << " as " << "q" << *iter;
+		}
+	}
+
+  cout << endl;
+	for (unsigned t = 0 ; t < tab ; t++)
+		cout << "  ";
+  cout << " from ";
+  {
+    unsigned id=0;
+    for (vector<QueryGraph::Node>::const_iterator iter=subquery.nodes.begin(),limit=subquery.nodes.end();iter!=limit;++iter) {
+      if (id) cout << ",";
+      cout << schema << ".facts f" << id;
+      ++id;
+    }
+
+  }
+  set<unsigned> varsfilters;
+  if (subquery.filters.size()) {
+    cout << ",";
+    getVariables(subquery.filters,varsfilters);
+    unsigned id=0;
+    for(set<unsigned>::const_iterator iter=varsfilters.begin(),limit=varsfilters.end();iter!=limit;iter++) {
+      if(id) cout << ",";
+      cout << schema << ".strings m" << id;
+      id++;
+    }
+  }
+  cout << endl;
+ for (unsigned t = 0 ; t < tab ; t++)
+		cout << "  ";
+
+ if (!subquery.edges.empty() || 
+     !subquery.filters.empty() || 
+     (subquery.edges.empty() && ((*subquery.nodes.begin()).constSubject ||
+                                 (*subquery.nodes.begin()).constObject))) 
+	cout << " where ";
+ {
+    unsigned id=0; bool first=true;
+    for (vector<QueryGraph::Node>::const_iterator iter=subquery.nodes.begin(),limit=subquery.nodes.end();iter!=limit;++iter) {
+      string s=buildFactsAttribute(id,"subject"),p=buildFactsAttribute(id,"predicate"),o=buildFactsAttribute(id,"object");
+      if ((*iter).constSubject) {
+	if (first) first=false; else cout << " and ";
+	cout << s << "=" << (*iter).subject;
+      } else if (representative[(*iter).subject]!=s) {
+	if (first) first=false; else cout << " and ";
+	cout << s << "=" << representative[(*iter).subject];
+      }
+      if ((*iter).constPredicate) {
+      } else if (representative[(*iter).predicate]!=p) {
+	if (first) first=false; else cout << " and ";
+	cout << p << "=" << representative[(*iter).predicate];
+      }
+      if ((*iter).constObject) {
+	if (first) first=false; else cout << " and ";
+	cout << o << "=" << (*iter).object;
+      } else if (representative[(*iter).object]!=o) {
+	if (first) first=false; else cout << " and ";
+	cout << o << "=" << representative[(*iter).object];
+      }
+      ++id;
+    }
+  }
+  //Join for get values for filters.
+  if (subquery.filters.size()) {
+    map<unsigned,unsigned> varsfilters_map;
+    set2map(varsfilters,varsfilters_map);
+    unsigned id = 0;
+    for(set<unsigned>::const_iterator iter=varsfilters.begin(),limit=varsfilters.end();iter!=limit;iter++){
+      cout << " and m" << id << ".id=" << representative[*iter];
+      id++;
+    }
+    //Finally, translate filters.
+    for(vector<QueryGraph::Filter>::iterator iter = subquery.filters.begin(), limit = subquery.filters.end() ; iter != limit ; iter++) {
+      cout << " and "; 
+      translateFilterPostgres(*iter,varsfilters_map);
+    }
+  }
+ cout << ")";
+}
+
+
+static void translateGJoinPostgres(pattern *structure, QueryGraph::SubQuery query, set<unsigned> common, unsigned tab, const string& schema) {
+	if(query.gjoins.empty()) {
+		translateSubQueryPostgres(query,structure,common,tab,schema);
+	}
+	else {
+		for (unsigned t = 0 ; t < tab ; t++)
+			cout << "  ";
+		cout << "(select ";
+	  {
+  	  unsigned i=0;
+	    for (set<unsigned>::const_iterator iter=structure->vars->vars.begin(),limit=structure->vars->vars.end();iter!=limit;++iter) {      
+				if (i) cout << ",";
+
+				if (structure->arg1->vars->vars.count(*iter))
+					cout << "p1";
+				else
+					cout << "p2";
+
+				cout << ".r" << *iter << " as " << "r" << *iter;
+				i = 1; 
+			}
+			for (set<unsigned>::const_iterator iter=common.begin(),limit=common.end();iter!=limit;++iter) {      
+				cout << ",";
+				if (structure->arg1->vars->vars.count(*iter))
+					cout << "p1";
+				else
+					cout << "p2";
+				cout << ".r" << *iter << " as " << "q" << *iter;
+			}
+		}
+		cout << endl;
+		for (unsigned t = 0 ; t < tab ; t++)
+			cout << "  ";
+		cout << " from " << endl;
+		translateGJoinPostgres(structure->arg1,query.gjoins[0][0],structure->vars->commons,tab+1,schema);
+		cout << " p1," << endl;
+		translateGJoinPostgres(structure->arg2,query.gjoins[0][1],structure->vars->commons,tab+1,schema);
+		cout << " p2 " << endl;
+		for (unsigned t = 0 ; t < tab ; t++)
+			cout << "  ";
+		cout << " where ";
+		unsigned i = 0;
+		for (set<unsigned>::const_iterator iter=structure->vars->commons.begin(),limit=structure->vars->commons.end();iter!=limit;++iter) {
+			if (i) cout << "and";
+			cout << "p1.q" << *iter << " = " << "p2.q" << *iter;
+			i = 1;
+		}
+		cout << ")";
+	}
+}
+
 //---------------------------------------------------------------------------
 // Name: translatePostgres
 // Authors: Giuseppe De Simone and Hancel Gonzalez
@@ -663,7 +864,16 @@ static void translatePostgres(QueryGraph& query, QueryGraph::SubQuery subquery, 
   map<unsigned,unsigned> projection,null;
   // No OPTIONAL, No UNION
   if (!subquery.optional.size() && !subquery.unions.size()) {
-    translateSubQueryPostgres(query,subquery,projection,schema,set<unsigned>(),null);
+ 		// No gjoin
+		if (subquery.gjoins.empty())
+	    translateSubQueryPostgres(query, subquery, projection, schema, set<unsigned>(), null);
+		// Gjoin clause
+		else {
+			pattern *structure;
+			structure = new pattern;
+			query2structure(query.getQuery(),structure);	
+			translateGJoinPostgres(structure,subquery,set<unsigned>(),1,schema);
+		} 
   }
   // Only UNION clause
   else if (!subquery.optional.size() && subquery.unions.size() == 1) {
@@ -1142,44 +1352,6 @@ static void translateOptionalMonetDB(QueryGraph& query, QueryGraph::SubQuery sub
    }
 
    cout  << endl;
-}
-
-struct pattern {
-	struct variables {
-		set<unsigned> vars, commons;
-
-		variables() {
-			vars.clear();
-			commons.clear();
-		}
-
-		~variables() {
-		}
-	};
-
-	public:
-	variables *vars;
-	pattern *arg1, *arg2;
-
-	pattern(){
-		vars = new variables;
-		arg1 = NULL;
-		arg2 = NULL;
-	}
-};
-
-static void query2structure(QueryGraph::SubQuery query, pattern *structure) {
-	if (query.gjoins.empty()) {
-		getVariables(query,structure->vars->vars);
-	}
-	else {
-		structure->arg1 = new pattern;
-		structure->arg2 = new pattern;
-		query2structure(query.gjoins[0][0],structure->arg1);
-		query2structure(query.gjoins[0][1],structure->arg2);
-		join(structure->arg1->vars->vars,structure->arg2->vars->vars,structure->vars->vars);
-		intersect(structure->arg1->vars->vars,structure->arg2->vars->vars,structure->vars->commons);
-	}
 }
 
 static void translateSubQueryMonetDB(QueryGraph::SubQuery subquery, pattern *structure, set<unsigned> common, unsigned tab) {
