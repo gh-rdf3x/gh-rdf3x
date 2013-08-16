@@ -869,7 +869,7 @@ static void translateGJoinPostgres(pattern *structure, QueryGraph::SubQuery quer
 		cout << " where ";
 		unsigned i = 0;
 		for (set<unsigned>::const_iterator iter=structure->vars->commons.begin(),limit=structure->vars->commons.end();iter!=limit;++iter) {
-			if (i) cout << "and";
+			if (i) cout << " and ";
 			cout << "p1.q" << *iter << " = " << "p2.q" << *iter;
 			i = 1;
 		}
@@ -1005,6 +1005,11 @@ static void dumpPostgres(QueryGraph& query,const string& schema) {
  cout << endl;
 
  {
+ if (query.getLimit() != ~0u) {
+   cout << endl;
+   cout << "limit " << query.getLimit();
+ }
+
   unsigned id=0, o=1;
   for (QueryGraph::order_iterator iter=query.orderBegin(),limit=query.orderEnd();iter!=limit;++iter) {
     if (o) { cout << "order by "; o = 0; }
@@ -1012,11 +1017,6 @@ static void dumpPostgres(QueryGraph& query,const string& schema) {
     cout << "s" << (*iter).id << ".value";
     id++;
   }
- }
-
- if (query.getLimit() != ~0u) {
-   cout << endl;
-   cout << "limit " << query.getLimit();
  }
 
  cout << ";" << endl;
@@ -1536,7 +1536,7 @@ static void translateGJoinMonetDB(pattern *structure, QueryGraph::SubQuery query
 		cout << " where ";
 		unsigned i = 0;
 		for (set<unsigned>::const_iterator iter=structure->vars->commons.begin(),limit=structure->vars->commons.end();iter!=limit;++iter) {
-			if (i) cout << "and";
+			if (i) cout << " and ";
 			cout << "p1.q" << *iter << " = " << "p2.q" << *iter;
 			i = 1;
 		}
