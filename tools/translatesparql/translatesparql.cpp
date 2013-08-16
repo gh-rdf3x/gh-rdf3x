@@ -235,6 +235,12 @@ static void onOptional(set<unsigned> commons, unsigned fact_ini, unsigned fact) 
   cout << ")";
 }
 
+//---------------------------------------------------------------------------
+// Name: pattern
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Structure used to save variables of queries with GJOIN clause 
+//----------------------------------------------------------------------------
 struct pattern {
 	struct variables {
 		set<unsigned> vars, commons;
@@ -259,6 +265,13 @@ struct pattern {
 	}
 };
 
+//---------------------------------------------------------------------------
+// Name: query2structure
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: Given a QueryGraph with GJOIN clause, it get the variables 
+//              and save this information in the structure.
+//----------------------------------------------------------------------------
 static void query2structure(QueryGraph::SubQuery query, pattern *structure) {
 	if (query.gjoins.empty()) {
 		getVariables(query,structure->vars->vars);
@@ -687,6 +700,13 @@ static void translateOptionalPostgres(QueryGraph& query, QueryGraph::SubQuery su
   }
 }
 
+//---------------------------------------------------------------------------
+// Name: translateSubQueryPostgres
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: This procedure translate the Basic Group Graph Pattern for
+//              queries with GJOIN clause to Postgres.
+//---------------------------------------------------------------------------
 static void translateSubQueryPostgres(QueryGraph::SubQuery subquery, pattern *structure, set<unsigned> common, unsigned tab, const string& schema) {
 
   // dictionary with the nodes elements
@@ -798,7 +818,13 @@ static void translateSubQueryPostgres(QueryGraph::SubQuery subquery, pattern *st
  cout << ")";
 }
 
-
+//---------------------------------------------------------------------------
+// Name: translateGJoinPostgres
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: This procedure translate the GJoin clause for Postgres
+//
+//---------------------------------------------------------------------------
 static void translateGJoinPostgres(pattern *structure, QueryGraph::SubQuery query, set<unsigned> common, unsigned tab, const string& schema) {
 	if(query.gjoins.empty()) {
 		translateSubQueryPostgres(query,structure,common,tab,schema);
@@ -1354,6 +1380,13 @@ static void translateOptionalMonetDB(QueryGraph& query, QueryGraph::SubQuery sub
    cout  << endl;
 }
 
+//---------------------------------------------------------------------------
+// Name: translateSubQueryMonetDB
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: This procedure translate the Basic Group Graph Pattern for
+//              queries with GJOIN clause to MonetDB.
+//---------------------------------------------------------------------------
 static void translateSubQueryMonetDB(QueryGraph::SubQuery subquery, pattern *structure, set<unsigned> common, unsigned tab) {
 
   // dictionary with the nodes elements
@@ -1451,7 +1484,13 @@ static void translateSubQueryMonetDB(QueryGraph::SubQuery subquery, pattern *str
  cout << ")";
 }
 
-
+//---------------------------------------------------------------------------
+// Name: translateGJoinMonetDB
+// Authors: Giuseppe De Simone and Hancel Gonzalez
+// Advisor: Maria Esther Vidal
+// Description: This procedure translate the GJoin clause for MonetDB
+//
+//---------------------------------------------------------------------------
 static void translateGJoinMonetDB(pattern *structure, QueryGraph::SubQuery query, set<unsigned> common, unsigned tab) {
 	if(query.gjoins.empty()) {
 		translateSubQueryMonetDB(query,structure,common,tab);
