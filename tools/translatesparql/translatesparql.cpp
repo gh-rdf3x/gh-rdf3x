@@ -319,8 +319,7 @@ static void translateFilterPostgres(QueryGraph::Filter filter, map<unsigned,unsi
   else if (filter.type == QueryGraph::Filter::Literal)
     cout << filter.value;
   else if (filter.type == QueryGraph::Filter::IRI)
-    //cout << "\'" << filter.value << "\'";
-		cout << filter.id << endl;
+    cout << "\'" << filter.value << "\'";
   else if (unaryOperator.count(filter.type)) {
    if(filter.arg1->type != QueryGraph::Filter::Builtin_bound) {
     cout << unaryOperator[filter.type] << "(";
@@ -1054,8 +1053,8 @@ static void translateFilterMonetDB(QueryGraph::Filter filter, map<unsigned,strin
   else if (filter.type == QueryGraph::Filter::Literal)
     cout << filter.value;
   else if (filter.type == QueryGraph::Filter::IRI)
-    //cout << "\'" << filter.value << "\'";
-		cout << filter.id << endl;
+    cout << "\'" << filter.value << "\'";
+		//cout << filter.id << endl;
   else if (unaryOperator.count(filter.type)) {
    if(filter.arg1->type != QueryGraph::Filter::Builtin_bound) {
     cout << unaryOperator[filter.type] << "(";
